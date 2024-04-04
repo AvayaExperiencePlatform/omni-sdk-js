@@ -6,10 +6,10 @@ The AXP Core module provides a set of basic functionalities to initialize, shutd
 
 ## Installation
 
-To install the AXP Core, run the following command:
+To install the AXP Core, download the [avaya-axp-client-sdk-core-0.0.1.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.0.1.tgz) in your project and run the following command:
 
 ```bash
-npm install @avaya/axp-client-sdk-core
+npm install ./avaya-axp-client-sdk-core-0.0.1.tgz
 ```
 
 AXP Core exports a set of types and classes. Out of all the exports, the class `AxpClientSdk` is the origin point of the AXP Core usage flow. It can be imported as follows:

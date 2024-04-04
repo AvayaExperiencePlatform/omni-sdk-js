@@ -19,10 +19,10 @@ The AXP Messaging UI is build on top of [AXP Core](/modules/_avaya_axp_client_sd
 
 ## Installation
 
-To install the AXP Messaging UI SDK, run the following command:
+To install the AXP Messaging UI SDK, download the [avaya-axp-client-sdk-core-0.0.1.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.0.1.tgz), [avaya-axp-client-sdk-messaging-0.0.1.tgz](./omni-sdk/avaya-axp-client-sdk-messaging-0.0.1.tgz) and [avaya-axp-messaging-ui-sdk-0.0.1.tgz](./omni-sdk/avaya-axp-messaging-ui-sdk-0.0.1.tgz) in your project and run the following command:
 
 ```bash
-npm install @avaya/axp-messaging-ui-sdk
+npm install ./avaya-axp-client-sdk-core-0.0.1.tgz ./avaya-axp-client-sdk-messaging-0.0.1.tgz ./avaya-axp-messaging-ui-sdk-0.0.1.tgz
 ```
 
 The AXP Messaging UI SDK depends on the AXP Core SDK and AXP Messaging SDK, which would be installed alongside the AXP Messaging UI SDK.
