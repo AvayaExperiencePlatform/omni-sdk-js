@@ -1,0 +1,22 @@
+{
+  "name": "sample-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup --config",
+    "start": "http-server .",
+    "test": "echo \"No tests to run\""
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@avaya/axp-messaging-ui-sdk": "^0.0.0",
+    "@avaya/neo": "^3.80.3",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
