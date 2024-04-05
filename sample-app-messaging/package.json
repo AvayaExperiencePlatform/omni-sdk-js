@@ -12,7 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@avaya/axp-messaging-ui-sdk": "^0.0.0",
+    "@avaya/axp-client-sdk-core": "file:../omni-sdk/avaya-axp-client-sdk-core-0.0.1.tgz",
+    "@avaya/axp-client-sdk-messaging": "file:../omni-sdk/avaya-axp-client-sdk-messaging-0.0.1.tgz",
+    "@avaya/axp-messaging-ui-sdk": "file:../omni-sdk/avaya-axp-messaging-ui-sdk-0.0.1.tgz",
     "@avaya/neo": "^3.80.3",
     "uuid": "^9.0.1"
   },
