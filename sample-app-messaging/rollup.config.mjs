@@ -1,5 +1,5 @@
 import resolve from '@rollup/plugin-node-resolve';
-import { AVAYA_LICENSE_NOTICE } from '../avaya-license-banner.mjs';
+import { AVAYA_LICENSE_NOTICE } from './avaya-license-banner.mjs';
 
 
 export default {
