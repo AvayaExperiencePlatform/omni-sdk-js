@@ -6,36 +6,28 @@ This JavaScript based sample web application demonstrates how to quickly integra
 
 ## Steps to Run Sample Web Application
 
-1. **Add SDK Files to the Sample Application Project**
+1. **Clone or download the Omni JavaScript SDK repository**
 
-   Download the `.tar.gz` files from [omni-sdk](../omni-sdk) folder in your project.
+   Clone or download the [Omni JavaScript SDK repository](https://github.com/AvayaExperiencePlatform/omni-sdk-js) the `sample-app-messaging` is part of.
 
-2. **Install the Tarballs**
-
-   Run the following command in your project to install the required dependencies:
-
-    ```bash
-    npm install ./avaya-axp-client-sdk-core-0.0.1.tgz ./avaya-axp-client-sdk-messaging-0.0.1.tgz ./avaya-axp-messaging-ui-sdk-0.0.1.tgz
-    ```
-
-3. **Install the remaining dependencies**
-    Run the following command in your project to install the remaining dependencies used by the sample web application:
+2. **Install the remaining dependencies**
+    Change the directory to the `sample-app-messaging` folder and run the following command to install the dependencies used by the sample web application:
 
     ```bash
     npm install
     ```
 
-4. **Provide configurations**
+3. **Provide configurations**
     Open the [config.js](./config.js) file and update the required properties. It is mandatory to provide the correct values for `integrationId`, `appKey`, `host`, and `jwtUrl`.
 
-5. **Build the sample web application**
+4. **Build the sample web application**
     Build the web application by running the following command:
 
     ```bash
     npm run build
     ```
 
-6. **Start the sample web application**
+5. **Start the sample web application**
     Start the web application by running the following command:
 
     ```bash
@@ -44,5 +36,5 @@ This JavaScript based sample web application demonstrates how to quickly integra
 
     By default the sample web application will start listening on port `8080`. Check the console logs to confirm the port of the application.
 
-7. **Access the sample web application**
+6. **Access the sample web application**
     Open a browser and navigate to `http://localhost:<port>`. Once the page is loaded, click on the message bubble to start your messaging conversation.
