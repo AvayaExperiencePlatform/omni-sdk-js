@@ -6,15 +6,15 @@ The AXP Core module provides a set of basic functionalities to initialize, shutd
 
 ## Installation
 
-To install the AXP Core, download the [avaya-axp-client-sdk-core-0.0.1.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.0.1.tgz) in your project and run the following command:
+To install the AXP Core, download the [avaya-axp-client-sdk-core-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz) in your project and run the following command:
 
 ```bash
-npm install ./avaya-axp-client-sdk-core-0.0.1.tgz
+npm install ./avaya-axp-client-sdk-core-0.1.0.tgz
 ```
 
 AXP Core exports a set of types and classes. Out of all the exports, the class `AxpClientSdk` is the origin point of the AXP Core usage flow. It can be imported as follows:
 
-```ts
+```typescript
 import { AxpClientSdk } from '@avaya/axp-client-sdk-core';
 ```
 
@@ -34,23 +34,24 @@ Please refer to the documentation of the additional functionality module that yo
 
 List of currently available additional functionalities:
 
-- [AXP Messaging](/modules/_avaya_axp_client_sdk_messaging)
+- [AXP Messaging](./messaging.md)
 
 #### How to use the additional functionalities
 
 To use the additional functionalities, the Client has to install the additional functionality module (refer to the installation instructions of each additional functionality module for more details).
 
-Each additional functionality module exports a mixin function. The base conversation from AXP Core module can be enhanced by applying the mixin. This will come in handy when we add new functionalities in future releases.
+Each additional functionality module exports a mixin function. The base conversation from AXP Core module can be enhanced by applying this mixin. This will come in handy when we add new functionalities in future releases.
 
 Example of adding AXP Messaging functionality to the AXP Core Conversation:
 
 ```ts
+// TS/JS
 import { AxpClientSdk } from '@avaya/axp-client-sdk-core';
 import { AxpMessagingConversation } from '@avaya/axp-client-sdk-messaging';
 
 const EnhancedConversationClass = AxpMessagingConversation();
 
-// Arguments are not shown for brevity, refer to the Initialization section for the complete initialization example.
+// All arguments are not shown for brevity, refer to the Initialization section for the complete initialization example.
 const userSession = await AxpClientSdk.init(..., EnhancedConversationClass);
 ```
 
@@ -67,7 +68,7 @@ The SDK expects an implementation of the `JwtProvider` interface to be provided 
 
 JWT Provider example (in TypeScript):
 
-```ts
+```typescript
 import { JwtProvider } from '@avaya/axp-client-sdk-core';
 
 class MyJwtProvider implements JwtProvider {
@@ -106,7 +107,7 @@ Initialization can be done by calling the static method `init()` on the class `A
 
 Initialization Example:
 
-```ts
+```typescript
 import { AxpClientSdk } from '@avaya/axp-client-sdk-core';
 import { AxpMessagingConversation } from '@avaya/axp-client-sdk-messaging';
 
@@ -298,7 +299,7 @@ The current user's session can be terminated by calling the `shutdown()` method 
 
 To shut down the SDK, call the `shutdown()` method on the `AxpClientSdk` class. The `shutdown()` method returns a `Promise` that resolves when the SDK has been successfully shut down.
 
-```ts
+```typescript
 await AxpClientSdk.shutdown();
 ```
 

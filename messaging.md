@@ -2,7 +2,7 @@
 
 The AXP Messaging SDK module provides enables asynchronous communication, allowing end users to resume conversation threads at any time and view all previous messages exchanged as part of the conversation. This is unlike a session-based chat, where the chat is closed after the participants disconnect the dialog. The AXP Messaging module extends base Conversation with Messaging capabilities.
 
-The AXP Messaging module depends on the AXP Core module. Please refer to the [AXP Core documentation](/modules/_avaya_axp_client_sdk_core) before using the Messaging module.
+The AXP Messaging module depends on the AXP Core module. Please refer to the [AXP Core documentation](./core.md) before using the Messaging module.
 
 ## Main features
 
@@ -18,17 +18,17 @@ The AXP Messaging module depends on the AXP Core module. Please refer to the [AX
 
 AXP Messaging module requires the AXP Core module.
 
-To install the AXP Messaging module, download the [avaya-axp-client-sdk-core-0.0.1.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.0.1.tgz) and [avaya-axp-client-sdk-messaging-0.0.1.tgz](./omni-sdk/avaya-axp-client-sdk-messaging-0.0.1.tgz) in your project and run the following command:
+To install the AXP Messaging module, download the [avaya-axp-client-sdk-core-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz) and [avaya-axp-client-sdk-messaging-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-messaging-0.1.0.tgz) in your project and run the following command:
 
 ```bash
-npm install ./avaya-axp-client-sdk-core-0.0.1.tgz ./avaya-axp-client-sdk-messaging-0.0.1.tgz
+npm install ./avaya-axp-client-sdk-core-0.1.0.tgz ./avaya-axp-client-sdk-messaging-0.1.0.tgz
 ```
 
 This will install both AXP Core and AXP Messaging.
 
 ## Usage
 
-The AXP Messaging module provides the `AxpMessagingConversation` [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the AXP Core module. To use the Messaging module, you need to import the `AxpMessagingConversation` mixin function and apply it. Check out more details about additional functionalities in the [Using additional functionality](/modules/_avaya_axp_client_sdk_core#using-additional-functionalities) section of The AXP Core's documentation.
+The AXP Messaging module provides the `AxpMessagingConversation` [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the AXP Core module. To use the Messaging module, you need to import the `AxpMessagingConversation` mixin function and apply it. Check out more details about additional functionalities in the [Using additional functionality](./core.md#using-additional-functionalities) section of The AXP Core's documentation.
 
 Example of how to use AXP Messaging module:
 
@@ -51,7 +51,7 @@ defaultConversation.sendMessage(...); // <-- AXP Messaging method
 
 ## Messaging Conversation
 
-Messaging Conversation provides APIs to send and receive rich media and attachment messages, get conversation history and listen to message events. For more details on the APIs exposed on the Messaging Conversation, refer to the `{@link AxpMessagingConversationTrait}` interface.
+Messaging Conversation provides APIs to send and receive rich media and attachment messages, get conversation history and listen to message events. For more details on the APIs exposed on the Messaging Conversation, refer to the `AxpMessagingConversationTrait` interface.
 
 ### Getting conversation history
 
