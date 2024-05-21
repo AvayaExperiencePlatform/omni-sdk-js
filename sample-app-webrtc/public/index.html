@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Calling App for Web</title>
+    <link rel="stylesheet" type="text/css" href="./neo/dist/css/neo/neo.css" />
+	<link rel="stylesheet" type="text/css" href="./neo/dist/css/fonts/neo-icons.css" />
+	<link rel="stylesheet" type="text/css" href="./index.css"/>
+	<script type="module" src="./index.js"></script>
+</head>
+
+<body id="status">
+	<img class="avaya-logo" src="./assets/images/avaya_logo.svg" alt="Avaya"/>
+	<br/>
+    <button class="start-call-button neo-btn neo-btn--success neo-icon-call" role="button" type="button" name="startCallBT"></button>
+    <button class="start-call-button neo-btn neo-btn--success neo-icon-call" role="button" type="button" name="startCallBT" disabled></button>
+    <br/>
+
+    <!-- css-only dropdown, div below is shown only when the checkbox is checked (when label is clicked) -->
+    <label for="hidden-checkbox" class="dropdown-button">
+        Options &#9660;
+    </label>
+    <input class="options" id="hidden-checkbox" type="checkbox">
+    <div class="table">
+        <label for="muteAudio">Start with call muted</label>
+        <input type="checkbox" id="muteAudio" name="muteAudioCB" value="muteAudio">
+        <label for="appKey">AppKey</label>
+        <input type="text" id="appKey">
+    </div>
+
+    <!-- modal that's only visible when the call exists -->
+    <div class="call-container vertical">
+        <div class="horizontal">
+            <div class="user-icon neo-icon-user"></div>
+            <div class="vertical">
+                <div class="dial-pad">
+                    <button class="dtmf" value="1">1</button>
+                    <button class="dtmf" value="2">2</button>
+                    <button class="dtmf" value="3">3</button>
+                    <button class="dtmf" value="4">4</button>
+                    <button class="dtmf" value="5">5</button>
+                    <button class="dtmf" value="6">6</button>
+                    <button class="dtmf" value="7">7</button>
+                    <button class="dtmf" value="8">8</button>
+                    <button class="dtmf" value="9">9</button>
+                    <button class="dtmf" value="*">*</button>
+                    <button class="dtmf" value="0">0</button>
+                    <button class="dtmf" value="#">#</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="horizontal call-buttons">
+            <button class="end-call-button neo-btn neo-btn--alert neo-icon-call-end" role="button" type="button" name="endCallBT"></button>
+
+            <select id="microphoneListContainer"></select>
+            <select id="speakerListContainer"></select>
+
+            <!-- only one of these buttons is shown, controlled by id="status" element and css -->
+            <button class="neo-btn neo-btn--alert neo-btn--circle neo-icon-audio-off" role="button" title="Unmute" name="unmuteAudio"></button>
+            <button class="neo-btn neo-btn--success neo-btn--circle neo-icon-audio" role="button" title="Mute" name="muteAudio"></button>
+            <!-- only one of these buttons is shown, controlled by id="status" element and css -->
+            <button class="neo-btn neo-btn--alert neo-btn--circle neo-icon-sound" role="button"  type="button" title="Unmute Speaker" name="unmuteSpeaker"></button>
+            <button class="neo-btn neo-btn--success neo-btn--circle neo-icon-sound" role="button"  type="button" title="Mute Speaker" name="muteSpeaker"></button>
+        </div>
+    </div>
+</body>
+
+</html>
