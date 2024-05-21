@@ -1,5 +1,5 @@
 {
-  "name": "sample-app",
+  "name": "sample-app-messaging",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,6 @@
     "test": "echo \"No tests to run\""
   },
   "type": "module",
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "@avaya/axp-client-sdk-core": "file:../omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz",
