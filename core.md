@@ -310,7 +310,7 @@ await AxpClientSdk.shutdown();
 Similar to the initialization process, the SDK emits a shutdown event after the SDK has been successfully shut down. The consumers can listen to these events by providing a listener function to SDK.
 
 ```ts
-AxpClientSdk.onShutdown(() => {
+AxpClientSdk.addSdkShutdownListener(() => {
     console.log('SDK Shutdown');
     // ... your cleanup code.
 });
