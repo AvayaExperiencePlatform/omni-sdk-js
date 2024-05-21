@@ -5,7 +5,19 @@ to a server with a public or self signed certificates. We'll use http-server for
 
 ## Development
 
-### 1. Setup Certificates
+### 1. Clone or download the Omni JavaScript SDK repository
+
+Clone or download the repo [Omni JavaScript SDK repository](https://github.com/AvayaExperiencePlatform/omni-sdk-js) of which the `sample-app-calling` is part of.
+
+### 2. Install Dependencies
+
+Run the following command in the `sample-app-calling` directory to install the dependencies:
+
+```shell
+npm install
+```
+
+### 3. Setup Certificates
 
 Note: Certificates **MUST** be trusted for live reloading to work.
 (Reload server is on a separate port and would need to be overridden separately.)
@@ -24,7 +36,7 @@ cd sample-app-calling/ # ensure you're in this directory
 mkcert -key-file key.pem -cert-file cert.pem 127.0.0.1
 ```
 
-### 2. Run Local Server
+### 4. Run Local Server
 
 ```shell
 npm run serve
