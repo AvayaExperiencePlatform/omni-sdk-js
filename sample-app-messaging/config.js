@@ -15,7 +15,7 @@ const postbackLink = {
 
 const professionalTheme = {
   brandDetails: {
-    logoSource: "/assets/images/sample-logo.png",
+    logoSource: "public/assets/images/sample-logo.png",
     fontFamily: "'Noto Sans', sans-serif",
   },
 
