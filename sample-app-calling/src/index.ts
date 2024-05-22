@@ -1,13 +1,13 @@
 import {AxpClientSdk, JwtProvider, LogLevel} from "@avaya/axp-client-sdk-core";
 import {
-	AxpWebRtc,
+	AxpCalling,
 	AxpCall,
 	AxpCallRequestBuilder,
 	AxpDtmfTone,
 	AxpMediaInterface,
-	AxpWebRtcConversation,
-	AxpWebRtcConversationTrait
-} from "@avaya/axp-client-sdk-webrtc";
+	AxpCallingConversation,
+	AxpCallingConversationTrait
+} from "@avaya/axp-client-sdk-calling";
 
 const sampleTokenServerURL = "https://127.0.0.1:3000/token";
 
@@ -70,7 +70,7 @@ setupButton("unmuteSpeaker", () => call?.unmuteSpeaker().then(updateStatusFlags)
 
 
 const jwtTokenProvider = new JwtProviderImpl();
-let axpWebrtcSDK: AxpWebRtcConversationTrait | undefined;
+let conversation: AxpCallingConversationTrait | undefined;
 let call: AxpCall | undefined;
 
 async function login() {
@@ -83,11 +83,11 @@ async function login() {
 		logLevel: LogLevel.WARN,
 		jwtProvider: jwtTokenProvider,
 		idleTimeoutDuration: 360000,
-	}, AxpWebRtcConversation());
+	}, AxpCallingConversation());
 
-	axpWebrtcSDK = axpSession.conversations[0];
+	conversation = axpSession.conversations[0];
 
-	const mediaEngine = await AxpWebRtc.getMediaEngine();
+	const mediaEngine = await AxpCalling.getMediaEngine();
 	const audioIf = mediaEngine.getAudioInterface();
 
 	const speakerListContainer = document.getElementById('speakerListContainer') as HTMLSelectElement;
@@ -130,7 +130,7 @@ async function startCall() {
 	}
 
 	requestBuilder.setRemoteAddress(config.callingRemoteAddress);
-	call = await axpWebrtcSDK!.addCall(requestBuilder.build(), setupCallMonitoring);
+	call = await conversation!.addCall(requestBuilder.build(), setupCallMonitoring);
 	
 	callStarting = true;
 	updateStatusFlags();
@@ -241,7 +241,7 @@ function updateStatusFlags() {
 
 	setAttr('sdk-ready', sdkReady);
 
-	setAttr('service-available', AxpWebRtc.isServiceAvailable());
+	setAttr('service-available', AxpCalling.isServiceAvailable());
 	setAttr('call-exists', !!call);
 	setAttr('media-connected', call?.isMediaConnected());
 

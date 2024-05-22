@@ -1,30 +1,30 @@
-# AXP WebRTC
+# AXP Calling
 
-The AXP WebRTC SDK module provides browser based WebRTC communication. The AXP WebRTC module extends base Conversation with webRTC audio capabilities.
+The AXP Calling SDK module provides browser based WebRTC communication. The AXP Calling module extends base Conversation with Calling capabilities.
 
-The AXP WebRTC module depends on the AXP Core module. Please refer to the [AXP Core documentation](/modules/_avaya_axp_client_sdk_core) before using the WebRTC module.
+The AXP Calling module depends on the AXP Core module. Please refer to the [AXP Core documentation](/modules/_avaya_axp_client_sdk_core) before using the Calling module.
 
 ## Installation
 
-AXP WebRTC module requires the AXP Core module.
+AXP Calling module requires the AXP Core module.
 
-To install the AXP WebRTC module, download the [avaya-axp-client-sdk-core-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz) and [avaya-axp-client-sdk-webrtc-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-webrtc-0.1.0.tgz) in your project and run the following command:
+To install the AXP Calling module, download the [avaya-axp-client-sdk-core-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz) and [avaya-axp-client-sdk-calling-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-calling-0.1.0.tgz) in your project and run the following command:
 
 ```bash
-npm install ./avaya-axp-client-sdk-core-0.1.0.tgz ./avaya-axp-client-sdk-webrtc-0.1.0.tgz
+npm install ./avaya-axp-client-sdk-core-0.1.0.tgz ./avaya-axp-client-sdk-calling-0.1.0.tgz
 ```
 
-This will install both AXP Core and AXP WebRTC.
+This will install both AXP Core and AXP Calling.
 
 ## Usage
 
-The AXP WebRTC module provides the `AxpWebRtcConversation` [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the AXP Core module. To use the WebRTC module, you need to import the `AxpWebRtcConversation` mixin function and apply it. Check out more details about additional functionalities in the [Using additional functionality](./core.md#using-additional-functionalities) section of The AXP Core's documentation.
+The AXP Calling module provides the `AxpCallingConversation` [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the AXP Core module. To use the Calling module, you need to import the `AxpCallingConversation` mixin function and apply it. Check out more details about additional functionalities in the [Using additional functionality](./core.md#using-additional-functionalities) section of The AXP Core's documentation.
 
-Example of how to use AXP WebRTC module:
+Example of how to use AXP Calling module:
 
 ```ts
 import { AxpClientSdk, JwtProvider } from '@avaya/axp-client-sdk-core';
-import { AxpWebRtcConversation, AxpConversationWebRtcTrait } from '@avaya/axp-client-sdk-webrtc';
+import { AxpCallingConversation, AxpCallingConversationTrait } from '@avaya/axp-client-sdk-calling';
 
 const axpConfig = {
     integrationId: "<INTEGRATION_ID>",
@@ -35,24 +35,20 @@ const axpConfig = {
 
 AxpClientSDK.configure(axpConfig, jwtProvider);
 
-// Initiates a WebRTC conversation
+// Initiates a Calling conversation
 const axpSession = await AxpClientSDK.init({
     displayName: "<USER_NAME>",
     token: await jwtTokenProvider.fetchToken(),
     ...
-}, AxpWebRtcConversation());
-const axpWebrtcSDK: AxpConversationWebRtcTrait = axpSession.conversations[0];
-
-// Registers a WebRTC endpoint 
-// The WebRTCConfig is optional.
-const axpWebrtcEndpoint = await axpWebrtcSDK.createEndpoint(new AxpWebRtcConfigBuilder().build());
+}, AxpCallingConversation());
+const conversation: AxpCallingConversationTrait = axpSession.conversations[0];
 
 // Creates and starts a WebRTC call with optional audio muted initially 
-const axpCall = await axpWebrtcEndpoint.addCall(new AxpCallRequestBuilder().muteAudio().build());
+const axpCall = await conversation.addCall(new AxpCallRequestBuilder().muteAudio().build());
 
 // Creates and starts a WebRTC call with optional audio muted initially with optional
 // setupCallbacks: (call: AxpCall) => void to register for optional call related callbacks
-// const axpCall = await axpWebrtcEndpoint.addCall(new AxpCallRequestBuilder().muteAudio().build(), setupCallbacks);
+// const axpCall = await conversation.addCall(new AxpCallRequestBuilder().muteAudio().build(), setupCallbacks);
 
 // Call established
 

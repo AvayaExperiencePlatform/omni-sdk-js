@@ -1,4 +1,4 @@
-# AXP WebRTC ES JavaScript example
+# AXP Calling ES JavaScript example
 
 WebRTC requires client to connect using HTTPS. So to run the sample app you'll need to deploy it
 to a server with a public or self signed certificates. We'll use http-server for testing.
