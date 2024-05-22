@@ -2,7 +2,7 @@
 
 AXP Messaging UI SDK provides a highly customizable user interface as a [Web Component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) for messaging that can be easily integrated into the Client website to enable messaging capabilities. It empowers developers to finely tailor the messaging interface, allowing customization of colors, strings, icons, typography, etc., to meet the specific visual requirements of your application.
 
-The AXP Messaging UI is build on top of [AXP Core](/modules/_avaya_axp_client_sdk_core) and [AXP Messaging](/modules/_avaya_axp_client_sdk_messaging) SDKs. Before using the AXP Messaging UI SDK, please refer to [this page](https://developers.avayacloud.com/avaya-experience-platform/docs/introduction#next-steps) for a list of prerequisites.
+The AXP Messaging UI is build on top of [AXP Core](./core.md) and [AXP Messaging](./messaging.md) SDKs. Before using the AXP Messaging UI SDK, please refer to [this page](https://developers.avayacloud.com/avaya-experience-platform/docs/introduction#next-steps) for a list of prerequisites.
 
 ## Features
 
@@ -19,10 +19,10 @@ The AXP Messaging UI is build on top of [AXP Core](/modules/_avaya_axp_client_sd
 
 ## Installation
 
-To install the AXP Messaging UI SDK, download the [avaya-axp-client-sdk-core-0.0.1.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.0.1.tgz), [avaya-axp-client-sdk-messaging-0.0.1.tgz](./omni-sdk/avaya-axp-client-sdk-messaging-0.0.1.tgz) and [avaya-axp-messaging-ui-sdk-0.0.1.tgz](./omni-sdk/avaya-axp-messaging-ui-sdk-0.0.1.tgz) in your project and run the following command:
+To install the AXP Messaging UI SDK, download the [avaya-axp-client-sdk-core-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz), [avaya-axp-client-sdk-messaging-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-messaging-0.1.0.tgz) and [avaya-axp-messaging-ui-sdk-0.1.0.tgz](./omni-sdk/avaya-axp-messaging-ui-sdk-0.1.0.tgz) in your project and run the following command:
 
 ```bash
-npm install ./avaya-axp-client-sdk-core-0.0.1.tgz ./avaya-axp-client-sdk-messaging-0.0.1.tgz ./avaya-axp-messaging-ui-sdk-0.0.1.tgz
+npm install ./avaya-axp-client-sdk-core-0.1.0.tgz ./avaya-axp-client-sdk-messaging-0.1.0.tgz ./avaya-axp-messaging-ui-sdk-0.1.0.tgz
 ```
 
 The AXP Messaging UI SDK depends on the AXP Core SDK and AXP Messaging SDK, which would be installed alongside the AXP Messaging UI SDK.
@@ -87,7 +87,7 @@ The AXP Messaging UI SDK supports following configuration options:
 
 | Option                           | Type       | Required/Optional  | Description                                                                                            |
 |----------------------------------|------------|----------|------------------------------------------------------------------------------------------------------------------|
-| `host` | `string`   | Required      | The region of the AXP server.                                                                                    |
+| `host` | `string`   | Required      | Hostname of the AXP API endpoint to connect to or an AXP region code. If a region code is provided (e.g., "na" for North America), it will be converted to the corresponding hostname (e.g., "na.api.avayacloud.com"). If a full hostname is provided (e.g., "na.api.avayacloud.com"), it will be used as is.                                                                                     |
 | `integrationId` | `string`   | Required      | The unique 36 character Integration ID available to your account administrator when the integration was created. |
 | `appKey` | `string` | Required      | The unique key associate with tenant in case of APIXH integration.                                               |
 | `sessionParameters` | `object`   | Optional       | The session parameters to be passed to the AXP server.                                                           |
@@ -103,7 +103,7 @@ The AXP Messaging UI SDK supports following configuration options:
 | `beforeMessageSend`              | `function` | Optional       | The callback function to be called before a message is sent.                                                     |
 | `beforeMessageRender`            | `function` | Optional       | The callback function to be called before a message is rendered on the screen.                                   |
 | `displayStrings`                 | `DisplayStrings` | Optional | An object containing the display strings and their translations to be used in the AXP Messaging UI SDK. See [custom display strings and translations](#custom-display-strings-and-translations) section. |
-| `emojiMartTranslations`          | `Record<Language,EmojiMartTranslation>` | Optional | AXP Messaging UI SDK uses [Emoji Mart](https://github.com/missive/emoji-mart) Component as emoji picker. This configuration expects an object containing the display strings and their translations to be used for the emoji mart component. |
+| `emojiMartTranslations`          | `Record<Locale,EmojiMartTranslation>` | Optional | AXP Messaging UI SDK uses [Emoji Mart](https://github.com/missive/emoji-mart) Component as emoji picker. This configuration expects an object containing the display strings and their translations to be used for the emoji mart component. |
 | `themeCustomizations`            | `Record<string, AxpMessagingUiTheme>` | Optional | An object containing the theme customizations for the AXP Messaging UI SDK. Each key is a theme name and the value is the customizations for that theme. See [theme customization](#theme-customization) section. |
 | `defaultTheme`                   | `string`   | Optional       | Name of the default theme out of the themes provided via the `themeCustomizations` configuration to be used for the AXP Messaging UI SDK. |
 
@@ -116,11 +116,11 @@ The AXP Messaging UI SDK expects an implementation of the `JwtProvider` interfac
 1. `onExpiryWarning`: This method is called when the JWT is about to expire. In the argument of this method, the remaining time in milliseconds before the JWT expires is provided.
 2. `onExpiry`: This method is called when the JWT has expired.
 
-**The consumers of SDK should call the `AxpMessagingUiSdk.setJwt()` to provide a new JWT to the SDK.**
+**The consumers of SDK should call the `AxpMessagingUiSdk.setJWT()` to provide a new JWT to the SDK.**
 
 JWT Provider example (in TypeScript):
 
-```ts
+```typescript
 import { JwtProvider } from '@avaya/axp-messaging-ui-sdk';
 
 class MyJwtProvider implements JwtProvider {
@@ -171,7 +171,7 @@ const axpMessagingUi = AxpMessagingUiSdk.getInstance();
 axpMessagingUi.init(...);
 ```
 
-The `init()` method takes an object with the following properties:
+The `init()` method takes an object of type `AxpMessagingUiInitParams` containing the following properties:
 
 - `jwtProvider`: An implementation of the `JwtProvider` interface. See [Authentication](#authentication) section.
 - `userName` (optional): The name of the current User to be displayed in the AXP Messaging UI SDK.
@@ -247,7 +247,7 @@ The second timer is idle shutdown grace timer which runs after the idle timer ha
 
 Both the timeout values can be [configured](#configuration).
 
-Developers can listen to the Idle Timeoout Invoked event by providing the `onIdleTimeout()` callback during [configuration](#configuration). Alternatively, developers can also add listener for the Idle Timeout Invoked event by calling the static method `addIdleTimeOutInvokedListener()` on the class `AxpMessagingUiSdk`. Regardless of which approach is used, the callback will be called when the User is considered idle. And the instance on which the event occurred is passed as an argument to the callback.
+Developers can listen to the Idle Timeout Invoked event by providing the `onIdleTimeout()` callback during [configuration](#configuration). Alternatively, developers can also add listener for the Idle Timeout Invoked event by calling the static method `addIdleTimeOutInvokedListener()` on the class `AxpMessagingUiSdk`. Regardless of which approach is used, the callback will be called when the User is considered idle. And the instance on which the event occurred is passed as an argument to the callback.
 
 #### Extending the session
 
@@ -257,9 +257,9 @@ The AXP Messaging UI SDK provides a static method `resetIdleTimeout()` on the cl
 
 The AXP Messaging UI SDK provides an option to customize the display strings used in the UI. This can be done by providing the `displayStrings` configuration during [initialization](#configuration).
 
-Check out the `{@link DisplayStrings}` type exported by the AXP Messaging UI SDK to know the strings that can be customized.
+Check out the `DisplayStrings` type exported by the AXP Messaging UI SDK to know the strings that can be customized.
 
-The language of the messaging ui can be changed by calling the static method `setLocale()` on the class `AxpMessagingUiSdk`, which takes the locale string as an argument.
+The locale of the messaging ui can be changed by calling the static method `setLocale()` on the class `AxpMessagingUiSdk`, which takes the locale string as an argument.
 
 ### Theme Customization
 
@@ -267,25 +267,37 @@ The AXP Messaging UI SDK provides an option to customize the visual elements of 
 
 The themes can be changed by calling the static method `setTheme()` on the class `AxpMessagingUiSdk`.
 
-The `{@link AxpMessagingUiTheme}` type exported by the AXP Messaging UI SDK provides the structure of the theme object and all available options that can be changed. The options are organized by the various regions in the UI.
+The `AxpMessagingUiTheme` type exported by the AXP Messaging UI SDK provides the structure of the theme object and all available options that can be changed. The options are organized by the various regions in the UI.
 
 ### Other utilities and methods
 
-#### Properties
+#### Instance Properties
 
-The AXP Messaging UI SDK provides the following properties:
+The AXP Messaging UI SDK provides the following properties on `AxpMessagingUiSdk` class instance:
 
-- `currentTheme`: The name of the current theme being used by the AXP Messaging UI SDK. This is available as a static property of the `AxpMessagingUiSdk` class.
 - `initialized`: A boolean value indicating whether the AXP Messaging UI SDK is initialized or not. This is available on the instance of the `AxpMessagingUiSdk` class.
 
-#### Methods
+#### Static Properties
+
+The AXP Messaging UI SDK provides the following static properties on `AxpMessagingUiSdk` class:
+
+- `currentThemeName`: The name of the current theme being used by the AXP Messaging UI SDK. This is available as a static property of the `AxpMessagingUiSdk` class.
+
+#### Instance Methods
+
+The AXP Messaging UI SDK provides the following methods on `AxpMessagingUiSdk` class instance:
 
 - `minimize()`: Minimizes the AXP Messaging UI SDK to the messaging bubble. This is available as a static method of the `AxpMessagingUiSdk` class.
 - `maximize()`: Maximizes the AXP Messaging UI SDK from the messaging bubble. This is available as a static method of the `AxpMessagingUiSdk` class. This method can be called only when the AXP Messaging UI SDK has been initialized.
+
+#### Static Methods
+
+The AXP Messaging UI SDK provides the following static methods on `AxpMessagingUiSdk` class:
+
 - `setLogLevel()` : Sets the log level for the AXP Messaging UI SDK. This is available as a static method of the `AxpMessagingUiSdk` class.
-
-#### Attributes
-
-The AXP Messaging UI SDK provides the following attributes:
-
-- `hide`: A boolean attribute that can be set on the `<axp-messaging-ui-sdk>` Web Component to hide the messaging UI. Example: `<axp-messaging-ui-sdk hide="true"><axp-messaging-ui-sdk>`
+- `setShutdownListener()`: Sets the event handler callback that needs to be invoked when the Messaging UI SDK is shutdown. This method will reset the event handler callback that was previously configured in the global configuration object `axpMessagingUiConfig` (of type `AxpMessagingUiConfig`).
+- `setIdleTimeOutInvokedListener()`: Sets the event handler callback that needs to be invoked when the idle timeout is reached. This method will reset the event handler callback that was previously configured in the global configuration object `axpMessagingUiConfig` (of type `AxpMessagingUiConfig`).
+- `setInitializedListener()`: Sets the event handler callback that needs to be invoked when the Messaging UI SDK is initialized. This method will reset the event handler callback that was previously configured in the global configuration object `axpMessagingUiConfig` (of type `AxpMessagingUiConfig`).
+- `clearShutdownListener()`: Clears the event handler callback that was attached to the Messaging UI SDK shutdown event. This method will remove the event handler callback that was previously configured in the global configuration object `axpMessagingUiConfig` (of type `AxpMessagingUiConfig`).
+- `clearIdleTimeOutInvokedListener()`: Clears the event handler callback that was attached to the Messaging UI SDK idle timeout event. This method will remove the event handler callback that was previously configured in the global configuration object `axpMessagingUiConfig` (of type `AxpMessagingUiConfig`).
+- `clearInitializedListener()`: Clears the event handler callback that was attached to the Messaging UI SDK initialization event. This method will remove the event handler callback that was previously configured in the global configuration object `axpMessagingUiConfig` (of type `AxpMessagingUiConfig`).

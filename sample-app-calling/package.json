@@ -1,0 +1,30 @@
+{
+  "name": "sample-app-calling",
+  "version": "0.1.0",
+  "description": "Internal package for testing AXP WebRTC example",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup --config",
+    "serve": "rollup --config --watch",
+    "type-check": "tsc --noEmit",
+    "build:dev": "rollup --config"
+  },
+  "license": "",
+  "private": true,
+  "dependencies": {
+    "@avaya/axp-client-sdk-core": "file:../omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz",
+    "@avaya/axp-client-sdk-webrtc": "file:../omni-sdk/avaya-axp-client-sdk-webrtc-0.1.0.tgz",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "http-server": "^14.1.1",
+    "rollup": "^4.9.1",
+    "tslib": "^2.6.2",
+    "turbo": "^1.11.2",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-serve": "^1.1.1"
+  }
+}

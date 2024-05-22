@@ -1,6 +1,6 @@
 {
-  "name": "sample-app",
-  "version": "1.0.0",
+  "name": "sample-app-messaging",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,13 +9,11 @@
     "test": "echo \"No tests to run\""
   },
   "type": "module",
-  "author": "",
   "license": "ISC",
   "dependencies": {
-    "@avaya/axp-client-sdk-core": "file:../omni-sdk/avaya-axp-client-sdk-core-0.0.1.tgz",
-    "@avaya/axp-client-sdk-messaging": "file:../omni-sdk/avaya-axp-client-sdk-messaging-0.0.1.tgz",
-    "@avaya/axp-messaging-ui-sdk": "file:../omni-sdk/avaya-axp-messaging-ui-sdk-0.0.1.tgz",
-    "@avaya/neo": "^3.80.3",
+    "@avaya/axp-client-sdk-core": "file:../omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz",
+    "@avaya/axp-client-sdk-messaging": "file:../omni-sdk/avaya-axp-client-sdk-messaging-0.1.0.tgz",
+    "@avaya/axp-messaging-ui-sdk": "file:../omni-sdk/avaya-axp-messaging-ui-sdk-0.1.0.tgz",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

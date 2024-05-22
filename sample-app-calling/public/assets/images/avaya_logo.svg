@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Notepad -->
+<!-- (PD) January 25, 2006 - _Crotalus horridus_  -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   width="350"
+   height="100"
+   id="Avaya Logo">
+   <defs>
+    <path
+       fill="#CC0000"
+       d="M 0,72
+          L 34,0
+          H 44
+          L 78,72
+          H 64
+          L 39,18 24,51
+          H 47
+          L 52,61
+          H 19
+          L 14,72
+          Z"
+       id="LetterA" />
+    <path
+       fill="#CC0000"
+       d="M 0,0
+          L 34,72
+          H 44
+          L 78,0
+          H 64
+          L 39,55
+          L 14,0
+          Z"
+       id="LetterV" />
+    <path
+       fill="#CC0000"
+       d="M 0,0
+          L 30,71
+          L 17,98
+          H 31
+          L 78,0
+          H 63
+          L 37,56
+          L 15,0
+          Z"
+       id="LetterY" />
+  </defs>
+  <use x="4.0"   y="1.0"  xlink:href="#LetterA" />
+  <use x="69.0"  y="1.0"  xlink:href="#LetterV" />
+  <use x="133.0" y="1.0"  xlink:href="#LetterA" />
+  <use x="200.0" y="1.0"  xlink:href="#LetterY" />
+  <use x="264.0" y="1.0"  xlink:href="#LetterA" />
+</svg>
