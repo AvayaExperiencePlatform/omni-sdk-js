@@ -10,7 +10,6 @@
     "type-check": "tsc --noEmit",
     "build:dev": "rollup --config"
   },
-  "author": "Avaya Inc.",
   "license": "",
   "private": true,
   "dependencies": {
