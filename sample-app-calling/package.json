@@ -1,7 +1,7 @@
 {
   "name": "sample-app-calling",
   "version": "0.1.0",
-  "description": "Internal package for testing AXP WebRTC example",
+  "description": "Sample app for testing AXP Calling module",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -14,7 +14,7 @@
   "private": true,
   "dependencies": {
     "@avaya/axp-client-sdk-core": "file:../omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz",
-    "@avaya/axp-client-sdk-webrtc": "file:../omni-sdk/avaya-axp-client-sdk-webrtc-0.1.0.tgz",
+    "@avaya/axp-client-sdk-calling": "file:../omni-sdk/avaya-axp-client-sdk-calling-0.1.0.tgz",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
     "http-server": "^14.1.1",

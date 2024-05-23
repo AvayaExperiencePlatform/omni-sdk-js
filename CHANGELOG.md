@@ -1,8 +1,8 @@
 # Change Log
 
-## v0.1.0 (May 16, 2024)
+## v0.1.0 (May 22, 2024)
 
-- Introduction of new AXP Omni SDK module: AXP Web RTC.
+- Introduction of new AXP Omni SDK module: AXP Calling.
 - Documentation improvements for modules: AXP Core, AXP Messaging and AXP Messaging UI.
 - Accessibility improvements in AXP Messaging UI module.
 - Bugfixes in AXP Core, AXP Messaging and AXP Messaging UI modules.
