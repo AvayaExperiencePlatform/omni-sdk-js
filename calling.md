@@ -26,29 +26,38 @@ Example of how to use AXP Calling module:
 import { AxpClientSdk, JwtProvider } from '@avaya/axp-client-sdk-core';
 import { AxpCallingConversation, AxpCallingConversationTrait } from '@avaya/axp-client-sdk-calling';
 
-const axpConfig = {
+const config = {
     integrationId: "<INTEGRATION_ID>",
     appKey: "<APP_KEY>",
     axpHostName: "https://<Axp_HOST>",
+    callingRemoteAddress: "<E164_NUMBER>",
     logLevel: LogLevel.DEBUG
 };
 
-AxpClientSDK.configure(axpConfig, jwtProvider);
 
 // Initiates a Calling conversation
 const axpSession = await AxpClientSDK.init({
     displayName: "<USER_NAME>",
     token: await jwtTokenProvider.fetchToken(),
-    ...
+	integrationId: config.integrationId,
+	host: config.axpHostName,
+	appKey: config.appKey,
+	logLevel: config.loglevel,
+	jwtProvider: jwtTokenProvider,
 }, AxpCallingConversation());
 const conversation: AxpCallingConversationTrait = axpSession.conversations[0];
 
 // Creates and starts a WebRTC call with optional audio muted initially 
-const axpCall = await conversation.addCall(new AxpCallRequestBuilder().muteAudio().build());
+const requestBuilder = new AxpCallRequestBuilder();
+if (muteAudio) {
+    requestBuilder.muteAudio();
+}
+requestBuilder.setRemoteAddress(config.callingRemoteAddress);
+const axpCall = await conversation.addCall(requestBuilder.build());
 
 // Creates and starts a WebRTC call with optional audio muted initially with optional
 // setupCallbacks: (call: AxpCall) => void to register for optional call related callbacks
-// const axpCall = await conversation.addCall(new AxpCallRequestBuilder().muteAudio().build(), setupCallbacks);
+// const axpCall = await conversation.addCall(requestBuilder.build(), setupCallbacks);
 
 // Call established
 
