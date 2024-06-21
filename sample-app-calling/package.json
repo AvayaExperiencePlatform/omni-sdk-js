@@ -1,6 +1,6 @@
 {
   "name": "sample-app-calling",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sample app for testing AXP Calling module",
   "main": "index.js",
   "type": "module",
@@ -13,7 +13,7 @@
   "license": "",
   "private": true,
   "dependencies": {
-    "@avaya/axp-client-sdk-core": "file:../omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz",
+    "@avaya/axp-client-sdk-core": "file:../omni-sdk/avaya-axp-client-sdk-core-0.1.1.tgz",
     "@avaya/axp-client-sdk-calling": "file:../omni-sdk/avaya-axp-client-sdk-calling-0.1.0.tgz",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
