@@ -17,7 +17,22 @@ Run the following command in the `sample-app-calling` directory to install the d
 npm install
 ```
 
-### 3. Setup Certificates
+### 3. Update config settings in src/index.ts
+
+```ts
+const config = {
+integrationId: "<integrationId>",
+appKey: "<appKey>",
+axpHostName: "<axpHostName>",
+callingRemoteAddress: "<phoneNumber>"
+};
+```
+
+### 4. Build sample app
+
+npm run build
+
+### 5. Setup Certificates
 
 Note: Certificates **MUST** be trusted for live reloading to work.
 (Reload server is on a separate port and would need to be overridden separately.)
@@ -36,13 +51,13 @@ cd sample-app-calling/ # ensure you're in this directory
 mkcert -key-file key.pem -cert-file cert.pem 127.0.0.1
 ```
 
-### 4. Run Local Server
+### 6. Run Local Server
 
 ```shell
 npm run serve
 # bonus tip: run in your IDE to see build errors
 ```
 
-And navigate to `https://127.0.0.1:8080/` (Note: Avaya Experience Platform CORS will **NOT** work with `localhost`!)
+And navigate to https://127.0.0.1:8080/public (Note: Avaya Experience Platform CORS will **NOT** work with `localhost`!)
 
 This page will automatically reload when source files are changed.
