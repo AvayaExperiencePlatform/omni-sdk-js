@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.1.1 (June 21, 2024)
+- Bugfixes in AXP Calling module
+    - Add backwards compatibility for network events protocol
+    - Enable continuous activity for WebRTC call, i.e. prevent call ending after 10 minutes due to inactivity timer
+
 ## v0.1.0 (May 22, 2024)
 
 - Introduction of new AXP Omni SDK module: AXP Calling.
