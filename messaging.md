@@ -7,7 +7,7 @@ The AXP Messaging module depends on the AXP Core module. Please refer to the [AX
 ## Main features
 
 1. **Message History**: The AXP Messaging module provides a message history feature that allows users to view all messages exchanged in a conversation thread.
-2. **Resume Conversation**: The AXP Messaging module allows users to resume a messaging conversation thread at any time.
+2. **Resume Conversation**: The AXP Messaging module allows users to resume a messaging conversation thread at any time. This includes auto resuming the conversation initiated from another session of the same user, to converse simultaneously from multiple devices. Auto resuming might take a minute to detect an active conversation on another session.
 3. **Send Message**: The AXP Messaging module allows users to send messages to other participants in a conversation thread.
 4. **Receive Message**: The AXP Messaging module allows users to receive messages from other participants in a conversation thread.
 5. **Send rich media messages**: The AXP Messaging module allows users to send rich media messages like Post back, replies and location to other participants in a conversation thread.

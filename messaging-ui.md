@@ -273,6 +273,8 @@ The themes can be changed by calling the static method `setTheme()` on the class
 
 The [`AxpMessagingUiTheme`](https://avayaexperienceplatform.github.io/omni-sdk-js/types/_avaya_axp_messaging_ui_sdk.AxpMessagingUiTheme.html) type exported by the AXP Messaging UI SDK provides the structure of the theme object and all available options that can be changed. The options are organized by the various regions in the UI.
 
+**Note**: Browsers on iOS devices may auto zoom on the input fields if their fontSize is less than `16px`. To avoid this behavior, the `fontSize` of the `textInput` field in the theme configuration should be set to `16px` or more.
+
 ### Other utilities and methods
 
 #### Instance Properties

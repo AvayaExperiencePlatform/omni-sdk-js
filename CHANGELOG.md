@@ -3,16 +3,15 @@
 ## v0.2.0 (June 28, 2024)
 
 - Bugfixes in AXP Core, AXP Messaging and AXP Calling modules.
-
-### Changes in AXP Messaging UI
-
-- `displayNames` in `displayStrings` now accepts a callback function.
-- Attachment messages can now be sent with text.
-- Background and hover background colors of action buttons, attachment menu items and participants list icon can now be customized.
-- Anonymous customer name can be provided in `displayStrings`.
-- Fix: Coordinates are now numbers (LocationRequestHandler).
-- Fix: Enums are now exported as values.
-- Fix: AXP Messaging UI CSS is now scoped to the component and does not affect the rest of the page.
+- Auto resume of a messaging conversation initiated from another session of the same user.
+- Changes in AXP Messaging UI -
+  - `displayNames` in `displayStrings` now accepts a callback function.
+  - Attachment messages can now be sent with text.
+  - Background and hover background colors of action buttons, attachment menu items and participants list icon can now be customized.
+  - Anonymous customer name can be overridden in `displayStrings`. Default is 'Guest'.
+  - Coordinates are now numbers (LocationRequestHandler).
+  - Enums are now exported as values.
+  - AXP Messaging UI CSS is now scoped to the component and does not affect the rest of the page.
 
 ## v0.1.0 (May 22, 2024)
 
