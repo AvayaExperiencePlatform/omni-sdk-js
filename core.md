@@ -6,16 +6,16 @@ The AXP Core module provides a set of basic functionalities to initialize, shutd
 
 ## Installation
 
-To install the AXP Core, download the [avaya-axp-client-sdk-core-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz) in your project and run the following command:
+To install the AXP Core, download the [avaya-axp-client-sdk-core-0.2.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.2.0.tgz) in your project and run the following command:
 
 ```bash
-npm install ./avaya-axp-client-sdk-core-0.1.0.tgz
+npm install ./avaya-axp-client-sdk-core-0.2.0.tgz
 ```
 
 AXP Core exports a set of types and classes. Out of all the exports, the class `AxpClientSdk` is the origin point of the AXP Core usage flow. It can be imported as follows:
 
 ```typescript
-import { AxpClientSdk } from '@avaya/axp-client-sdk-core';
+import { AxpClientSdk } from "@avaya/axp-client-sdk-core";
 ```
 
 ## Usage
@@ -69,16 +69,16 @@ The SDK expects an implementation of the `JwtProvider` interface to be provided 
 JWT Provider example (in TypeScript):
 
 ```typescript
-import { JwtProvider } from '@avaya/axp-client-sdk-core';
+import { JwtProvider } from "@avaya/axp-client-sdk-core";
 
 class MyJwtProvider implements JwtProvider {
-    onExpiryWarning(timeToExpiry: number): void {
-        // ...
-    }
+	onExpiryWarning(timeToExpiry: number): void {
+		// ...
+	}
 
-    onExpiry(): void {
-        // ...
-    }
+	onExpiry(): void {
+		// ...
+	}
 }
 ```
 
@@ -140,10 +140,10 @@ Alternatively, the SDK emits an initialized event after the SDK initialization h
 
 ```ts
 AxpClientSdk.addSdkInitializedListener((userSession) => {
-    // userSession object contains the conversation object that can be used for further operations. More details on the conversation object are below.
+	// userSession object contains the conversation object that can be used for further operations. More details on the conversation object are below.
 
-    console.log('SDK Initialized');
-    // ... your code.
+	console.log("SDK Initialized");
+	// ... your code.
 });
 ```
 
@@ -155,7 +155,7 @@ The AXP Core Conversation contains -
 
 - Method to get the details of the participants involved in the conversation.
 - Method to provide listeners for the participant change events.
-- Method to  set the context parameters used for routing.
+- Method to set the context parameters used for routing.
 - Property `conversationId`.
 
 **💡 INFO: Based on [additional functionality](#using-additional-functionalities) that is included, the conversation will have additional properties and methods. Check out the documentation of each functionality that has been added to know more about the methods that it adds on to the Conversation.**
@@ -185,9 +185,9 @@ Context parameters are used to provide routing information to the AXP platform. 
 
 ```ts
 conversation.setContextParameters({
-    'key1': 'value1',
-    'key2': 'value2',
-    // ...
+	key1: "value1",
+	key2: "value2",
+	// ...
 });
 ```
 
@@ -203,17 +203,17 @@ const participants = conversation.participants;
 
 Apart from the initialized and shutdown events, the SDK emits a few more events that the consumers can listen to. These events are specific to the Conversation and hence the APIs to listen to these events are provided on the Conversation object.
 
-| Event Name | Description | API to provide listener |
-|------------|-------------|-------------------------|
-| Participant Added | Emitted when a new participant is added to the conversation. | `conversation.addParticipantAddedListener()` |
+| Event Name          | Description                                                  | API to provide listener                             |
+| ------------------- | ------------------------------------------------------------ | --------------------------------------------------- |
+| Participant Added   | Emitted when a new participant is added to the conversation. | `conversation.addParticipantAddedListener()`        |
 | Participant Removed | Emitted when a participant is removed from the conversation. | `conversation.addParticipantDisconnectedListener()` |
 
 The APIs to provide listeners returns a handlerId for that listener. This handleId can be used to remove the listener for that event.
 
 ```ts
 const participantAddedHandlerId = conversation.addParticipantAddedListener((participant) => {
-    console.log('Participant Added:', participant);
-    // ... your code.
+	console.log("Participant Added:", participant);
+	// ... your code.
 });
 
 // To remove the listener
@@ -222,12 +222,12 @@ conversation.removeParticipantAddedListener(participantAddedHandlerId);
 // Similarly for Participant Removed event
 
 const participantDisconnectedHandlerId = conversation.addParticipantDisconnectedListener((participant) => {
-    console.log('Participant Removed:', participant);
-    // ... your code.
+	console.log("Participant Removed:", participant);
+	// ... your code.
 });
 
 // To remove the listener
-conversation.removeParticipantDisconnectedListener(participantDisconnectedHandlerId);  
+conversation.removeParticipantDisconnectedListener(participantDisconnectedHandlerId);
 ```
 
 ### User Activity
@@ -246,9 +246,9 @@ Both the timeout values can be configured during the initialization by providing
 
 ```ts
 await AxpClientSdk.init({
-    // Other init params
-    idleTimeoutDuration: 5 * 60 * 1000, // in milliseconds
-    idleShutdownGraceTimeoutDuration: 1 * 60 * 1000, // in milliseconds
+	// Other init params
+	idleTimeoutDuration: 5 * 60 * 1000, // in milliseconds
+	idleShutdownGraceTimeoutDuration: 1 * 60 * 1000, // in milliseconds
 });
 ```
 
@@ -256,11 +256,11 @@ The Idle Timeout event can be listened to by providing a listener for the same.
 
 ```ts
 function warnUser(message) {
-    // Show warning on UI.
+	// Show warning on UI.
 }
 
 const handlerId = AxpClientSdk.addIdleTimeOutInvokedListener((eventPayload) => {
-    warnUser('You have been inactive for a while. Do you want to continue?');
+	warnUser("You have been inactive for a while. Do you want to continue?");
 });
 
 // It can be removed by calling the removeIdleTimeoutListener method.
@@ -279,23 +279,23 @@ The `resetIdleTimeout()` method only impacts the timers as opposed to calling me
 
 ```js
 function showWarningBox(eventPayload) {
-    const continueChatButton = document.getElementById('inactivity-warning-continue-chat');
+	const continueChatButton = document.getElementById("inactivity-warning-continue-chat");
 
-    continueChatButton.onclick = () => {
-        AxpClientSdk.resetIdleTimeout();
-    }
-    // ...
-    setTimeout(hideWarningBox, eventPayload.gracePeriod);
+	continueChatButton.onclick = () => {
+		AxpClientSdk.resetIdleTimeout();
+	};
+	// ...
+	setTimeout(hideWarningBox, eventPayload.gracePeriod);
 }
 
 function hideWarningBox() {
-    // ...
+	// ...
 }
 ```
 
 ### Shutting down the SDK
 
-The current user's session can be terminated by calling the `shutdown()` method of `AxpClientSdk`. This will end the session and cleanup all the corresponding  data within the SDK. **Irrespective of the success or failure of the termination operation, the SDK cleanup will be performed.**
+The current user's session can be terminated by calling the `shutdown()` method of `AxpClientSdk`. This will end the session and cleanup all the corresponding data within the SDK. **Irrespective of the success or failure of the termination operation, the SDK cleanup will be performed.**
 
 To shut down the SDK, call the `shutdown()` method on the `AxpClientSdk` class. The `shutdown()` method returns a `Promise` that resolves when the SDK has been successfully shut down.
 
@@ -311,7 +311,7 @@ Similar to the initialization process, the SDK emits a shutdown event after the 
 
 ```ts
 AxpClientSdk.addSdkShutdownListener(() => {
-    console.log('SDK Shutdown');
-    // ... your cleanup code.
+	console.log("SDK Shutdown");
+	// ... your cleanup code.
 });
 ```

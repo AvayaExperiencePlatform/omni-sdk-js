@@ -58,21 +58,25 @@
 	right: 8vw;
 
 	background-color: inherit;
-	box-shadow: 0 0 1em 0 black,
-	0 0 0 100vw rgba(127, 127, 127, 0.5);
+	box-shadow:
+		0 0 1em 0 black,
+		0 0 0 100vw rgba(127, 127, 127, 0.5);
 
 	opacity: 0;
 	pointer-events: none;
-	transform: scale(.9);
+	transform: scale(0.9);
 
-	transition: opacity 0.2s linear, transform 0.2s ease-out;
+	transition:
+		opacity 0.2s linear,
+		transform 0.2s ease-out;
 	overflow-y: auto;
 }
 
 @media (prefers-color-scheme: dark) or (prefers-color-scheme: no-preference) {
 	.call-container {
-		box-shadow: 0 0 1em 0 white,
-		0 0 0 100vw rgba(127, 127, 127, 0.5);
+		box-shadow:
+			0 0 1em 0 white,
+			0 0 0 100vw rgba(127, 127, 127, 0.5);
 	}
 }
 
@@ -124,18 +128,18 @@
 	min-width: 4em;
 }
 
-#status[speaker-muted] button[name=muteSpeaker] {
+#status[speaker-muted] button[name="muteSpeaker"] {
 	display: none;
 }
 
-#status:not([speaker-muted]) button[name=unmuteSpeaker] {
+#status:not([speaker-muted]) button[name="unmuteSpeaker"] {
 	display: none;
 }
 
-#status[mic-muted] button[name=muteAudio] {
+#status[mic-muted] button[name="muteAudio"] {
 	display: none;
 }
 
-#status:not([mic-muted]) button[name=unmuteAudio] {
+#status:not([mic-muted]) button[name="unmuteAudio"] {
 	display: none;
 }

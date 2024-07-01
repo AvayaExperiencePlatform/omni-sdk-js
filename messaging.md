@@ -7,7 +7,7 @@ The AXP Messaging module depends on the AXP Core module. Please refer to the [AX
 ## Main features
 
 1. **Message History**: The AXP Messaging module provides a message history feature that allows users to view all messages exchanged in a conversation thread.
-2. **Resume Conversation**: The AXP Messaging module allows users to resume a messaging conversation thread at any time.
+2. **Resume Conversation**: The AXP Messaging module allows users to resume a messaging conversation thread at any time. This includes auto resuming the conversation initiated from another session of the same user, to converse simultaneously from multiple devices. Auto resuming might take a minute to detect an active conversation on another session.
 3. **Send Message**: The AXP Messaging module allows users to send messages to other participants in a conversation thread.
 4. **Receive Message**: The AXP Messaging module allows users to receive messages from other participants in a conversation thread.
 5. **Send rich media messages**: The AXP Messaging module allows users to send rich media messages like Post back, replies and location to other participants in a conversation thread.
@@ -18,10 +18,10 @@ The AXP Messaging module depends on the AXP Core module. Please refer to the [AX
 
 AXP Messaging module requires the AXP Core module.
 
-To install the AXP Messaging module, download the [avaya-axp-client-sdk-core-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz) and [avaya-axp-client-sdk-messaging-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-messaging-0.1.0.tgz) in your project and run the following command:
+To install the AXP Messaging module, download the [avaya-axp-client-sdk-core-0.2.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.2.0.tgz) and [avaya-axp-client-sdk-messaging-0.2.0.tgz](./omni-sdk/avaya-axp-client-sdk-messaging-0.2.0.tgz) in your project and run the following command:
 
 ```bash
-npm install ./avaya-axp-client-sdk-core-0.1.0.tgz ./avaya-axp-client-sdk-messaging-0.1.0.tgz
+npm install ./avaya-axp-client-sdk-core-0.2.0.tgz ./avaya-axp-client-sdk-messaging-0.2.0.tgz
 ```
 
 This will install both AXP Core and AXP Messaging.
@@ -61,28 +61,28 @@ Note: The iterator can only be used to get messages conversed in the conversatio
 
 Each Page of the iterator contains a list of messages. As the page number increases, the messages are older. The iterator can be used to get messages in both directions (forward and backward).
 
-The `PageIterator.previous()` and `PageIterator.next()` are async methods, when called they fetch the previous and next page of messages respectively and each resolves with an Array of `Message`. The `PageIterator.hasNext()` and `PageIterator.hasPrevious()` methods check if there are more messages in the next and previous pages, respectively.  
+The `PageIterator.previous()` and `PageIterator.next()` are async methods, when called they fetch the previous and next page of messages respectively and each resolves with an Array of `Message`. The `PageIterator.hasNext()` and `PageIterator.hasPrevious()` methods check if there are more messages in the next and previous pages, respectively.
 
 At any point `PageIterator.items` can be used to get the messages on the current page.
 
 ```ts
 function showMessagesOnUI(messages) {
-    // Logic to show messages on UI.
-    // ...
+	// Logic to show messages on UI.
+	// ...
 }
 
 const iterator = await conversation.getMessages(15);
 
 showMessagesOnUI(iterator.items);
 
-const loadMore = document.getElementById('load-more-button');
+const loadMore = document.getElementById("load-more-button");
 
 loadMore.onclick = function () {
-    if (iterator.hasPrevious()) {
-        const previousPage = await iterator.previous();
-        showMessagesOnUI(previousPage);
-    }
-}
+	if (iterator.hasPrevious()) {
+		const previousPage = await iterator.previous();
+		showMessagesOnUI(previousPage);
+	}
+};
 ```
 
 ### Sending messages
@@ -108,7 +108,7 @@ To send a message, use the `sendMessage()` method on the Conversation. The `send
 To send a plain text message, use the `SendTextMessage` class to build your message. The `SendTextMessage` class constructor takes a `text` and an optional `parentMessageId` parameter. The `parentMessageId` is the messageId of the message to which the current message is a reply.
 
 ```ts
-const message = new SendTextMessage('Hi');
+const message = new SendTextMessage("Hi");
 conversation.sendMessage(message);
 ```
 
@@ -117,7 +117,12 @@ conversation.sendMessage(message);
 To send a rich media reply message, use the `SendMessageReplyAction` class to build your message. The `SendMessageReplyAction` class constructor takes in the action `payload` of the selected action from the list of actions in the message received from Agent. Along with `payload`, you can also pass optional arguments `actionText`, `iconUrl` and the `parentMessageId` parameter. Here the `parentMessageId` can be used to specify the Agent's reply request rich media message to which this current message is a reply.
 
 ```ts
-const message = new SendMessageReplyAction('CUSTOMER_HAPPY', 'Happy', 'https://example.com/happy.png', 'acbc012d-1b73-4e1b-98c9-fe64e7ab2b41');
+const message = new SendMessageReplyAction(
+	"CUSTOMER_HAPPY",
+	"Happy",
+	"https://example.com/happy.png",
+	"acbc012d-1b73-4e1b-98c9-fe64e7ab2b41",
+);
 conversation.sendMessage(message);
 ```
 
@@ -126,18 +131,18 @@ conversation.sendMessage(message);
 To send a rich media postback message, use the `SendMessagePostBackAction` class to build your message. The `SendMessagePostBackAction` class constructor takes in the action `payload` of the selected action from the list of actions in the message received from Agent. Along with `payload`, you can also pass optional arguments `actionText` and the `parentMessageId` parameter. Here the `parentMessageId` can be used to specify the Agent's post back request rich media message to which this current message is a reply.
 
 ```ts
-const message = new SendMessagePostBackAction('SHIP_TO_HOME', 'Ship to home', 'acbc012d-1b73-4e1b-98c9-fe64e7ab2b41');
+const message = new SendMessagePostBackAction("SHIP_TO_HOME", "Ship to home", "acbc012d-1b73-4e1b-98c9-fe64e7ab2b41");
 conversation.sendMessage(message);
 ```
 
 #### Sending location messages
 
-To send a location message, use the `SendMessageLocation` class to build your message. The `SendMessageLocation` class constructor takes in the `latitude`, `longitude`, and  optional arguments `name` and `address`, `parentMessageId`. The `parentMessageId` is the messageId of the message to which the current message is a reply.
+To send a location message, use the `SendMessageLocation` class to build your message. The `SendMessageLocation` class constructor takes in the `latitude`, `longitude`, and optional arguments `name` and `address`, `parentMessageId`. The `parentMessageId` is the messageId of the message to which the current message is a reply.
 
 The `name` and `address` are optional parameters that can be used to provide additional information about the location.
 
 ```ts
-const message = new SendMessageLocation(0, 0, 'North Pole of the Earth', 'North Pole');
+const message = new SendMessageLocation(0, 0, "North Pole of the Earth", "North Pole");
 conversation.sendMessage(message);
 ```
 
@@ -146,19 +151,23 @@ conversation.sendMessage(message);
 To send an attachment message, use the `SendMessageAttachment` class to build your message. The `SendMessageAttachment` class constructor takes in the `File` object and optional arguments `text` (optional text to send along side the file), `parentMessageId`. The `parentMessageId` is the messageId of the message to which the current message is a reply. The `SendMessageAttachment` class can be used to send images as well.
 
 ```ts
-const fileInput = document.getElementById('file-input')
+const fileInput = document.getElementById("file-input");
 let selectedFile;
 
 fileInput.onchange = function () {
-    selected = fileInput.files[0];
-}
+	selected = fileInput.files[0];
+};
 
-const sendAttachmentButton = document.getElementById('send-attachment-button');
+const sendAttachmentButton = document.getElementById("send-attachment-button");
 
 sendAttachmentButton.onclick = function () {
-    const message = new SendMessageAttachment(selectedFile, 'Here is the invoice', 'acbc012d-1b73-4e1b-98c9-fe64e7ab2b41');
-    conversation.sendMessage(message);
-}
+	const message = new SendMessageAttachment(
+		selectedFile,
+		"Here is the invoice",
+		"acbc012d-1b73-4e1b-98c9-fe64e7ab2b41",
+	);
+	conversation.sendMessage(message);
+};
 ```
 
 ### Waiting for message to be sent
@@ -171,12 +180,12 @@ The Client must listen to the the Message Delivered event to be notified when th
 
 ```ts
 function showTickOnUI(message) {
-    // Logic to show tick on UI.
-    // ...
+	// Logic to show tick on UI.
+	// ...
 }
 
 conversation.addMessageDeliveredListener((message) => {
-    showTickOnUI(message);
+	showTickOnUI(message);
 });
 ```
 
@@ -185,14 +194,13 @@ conversation.addMessageDeliveredListener((message) => {
 The Client must listen to the the Message Arrived event to be notified when the messages are received from the Agent. To do so the Client use the `addMessageArrivedListener()` method on the Conversation object to register the Message Arrived event listener. The `addMessageArrivedListener()` method the listener function as the argument. The listener will be called with the Message object corresponding to the message that received. The Message object contains the unique `messageId` and body of the message sent by the Agent.
 
 ```ts
-
 function showMessagesOnUI(message) {
-    // Logic to show messages on UI.
-    // ...
+	// Logic to show messages on UI.
+	// ...
 }
 
 conversation.addMessageArrivedListener((message) => {
-    showMessagesOnUI(message);
+	showMessagesOnUI(message);
 });
 ```
 
@@ -204,35 +212,37 @@ During the session, the state of SDK’s connection with AXP Servers can change.
 
 List of Events:
 
-| Event Name | Description |
-|------------|-------------|
-| Event Stream Connecting | This event is raised when the SDK tries to connect with the event stream. |
-| Event Stream Connected | This event is raised when the SDK’s connection attempt was successful, and the connection with AXP is established. |
-| Event Stream Failed | This event is raised when the event stream breaks/fails due to some reason. Details like the reason for failure as well as next retry attempt is provided in the event. |
-| Event Stream Closed | This event is raised when the SDK disconnects itself from the event stream. |
+| Event Name              | Description                                                                                                                                                             |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Event Stream Connecting | This event is raised when the SDK tries to connect with the event stream.                                                                                               |
+| Event Stream Connected  | This event is raised when the SDK’s connection attempt was successful, and the connection with AXP is established.                                                      |
+| Event Stream Failed     | This event is raised when the event stream breaks/fails due to some reason. Details like the reason for failure as well as next retry attempt is provided in the event. |
+| Event Stream Closed     | This event is raised when the SDK disconnects itself from the event stream.                                                                                             |
 
 The Client can use `add/remove` methods exposed by the `AxpMessaging` namespace to subscribe/unsubscribe to these events.
 
 Example:
 
 ```ts
-import { AxpMessaging } from '@avaya/axp-client-sdk-messaging';
+import { AxpMessaging } from "@avaya/axp-client-sdk-messaging";
 
 AxpMessaging.addEventStreamConnectingListener((eventPayload) => {
-    // Show connecting on UI.
+	// Show connecting on UI.
 });
 
 AxpMessaging.addEventStreamConnectedListener((eventPayload) => {
-    // Show connected on UI.
+	// Show connected on UI.
 });
 
 AxpMessaging.addEventStreamFailedListener((eventPayload) => {
-    // Show network disconnected on UI.
-    console.log(`SDK disconnected due to ${eventPayload.reason}, next retry attempt will be made after ${eventPayload.retryAfter} seconds.`);
+	// Show network disconnected on UI.
+	console.log(
+		`SDK disconnected due to ${eventPayload.reason}, next retry attempt will be made after ${eventPayload.retryAfter} seconds.`,
+	);
 });
 
 AxpMessaging.addEventStreamClosedListener((eventPayload) => {
-    // Show connection closed on UI.
+	// Show connection closed on UI.
 });
 ```
 
@@ -241,7 +251,7 @@ After disconnection, the SDK will try to reconnect with AXP until the reconnecti
 Post this, the Client can make an explicit attempt to retry connecting with AXP. To do so, the Client must call the `retryConnection()` method exposed by the `AxpMessaging` namespace.
 
 ```ts
-import { AxpMessaging } from '@avaya/axp-client-sdk-messaging';
+import { AxpMessaging } from "@avaya/axp-client-sdk-messaging";
 
 AxpMessaging.retryConnection();
 ```

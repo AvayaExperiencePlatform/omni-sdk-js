@@ -19,13 +19,13 @@ The AXP Messaging UI is build on top of [AXP Core](./core.md) and [AXP Messaging
 
 ## Installation
 
-To install the AXP Messaging UI SDK, download the [avaya-axp-client-sdk-core-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz), [avaya-axp-client-sdk-messaging-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-messaging-0.1.0.tgz) and [avaya-axp-messaging-ui-sdk-0.1.0.tgz](./omni-sdk/avaya-axp-messaging-ui-sdk-0.1.0.tgz) in your project and run the following command:
+To install the AXP Messaging UI SDK, download the [avaya-axp-messaging-ui-sdk-0.2.0.tgz](./omni-sdk/avaya-axp-messaging-ui-sdk-0.2.0.tgz) in your project and run the following command:
 
 ```bash
-npm install ./avaya-axp-client-sdk-core-0.1.0.tgz ./avaya-axp-client-sdk-messaging-0.1.0.tgz ./avaya-axp-messaging-ui-sdk-0.1.0.tgz
+npm install ./avaya-axp-messaging-ui-sdk-0.2.0.tgz
 ```
 
-The AXP Messaging UI SDK depends on the AXP Core SDK and AXP Messaging SDK, which would be installed alongside the AXP Messaging UI SDK.
+The AXP Messaging UI SDK depends on the AXP Core SDK and AXP Messaging SDK, which are bundled with the AXP Messaging UI SDK.
 
 ## Usage
 
@@ -42,16 +42,16 @@ Configuration script: `axp-messaging-ui-config.js`
 ```js
 // Configuration script - axp-messaging-ui-config.js
 window.AxpMessagingUiConfig = {
-  // Required AXP configurations
-  // Full list of AXP configurations are ignored here for brevity. Please refer to the Configuration options section below to know more.
-}
+	// Required AXP configurations
+	// Full list of AXP configurations are ignored here for brevity. Please refer to the Configuration options section below to know more.
+};
 ```
 
 ```js
 // Alternatively, you can declare the config object using the `var` keyword.
 var AxpMessagingUiConfig = {
-  // ...
-}
+	// ...
+};
 ```
 
 Your website's script that uses the AXP Messaging UI SDK: `your-website-script.js`
@@ -66,18 +66,18 @@ Your website's main HTML file: `index.html`
 
 ```html
 <!-- Your index.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Messaging-App-UI</title>
-    <script src="/path/to/axp-messaging-ui-config.js"></script>
-    <script src="/path/to/your-website-script.js" type="module"></script>
-</head>
-<body>
-    <axp-messaging-ui-sdk></axp-messaging-ui-sdk>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Messaging-App-UI</title>
+		<script src="/path/to/axp-messaging-ui-config.js"></script>
+		<script src="/path/to/your-website-script.js" type="module"></script>
+	</head>
+	<body>
+		<axp-messaging-ui-sdk></axp-messaging-ui-sdk>
+	</body>
 </html>
 ```
 
@@ -85,27 +85,27 @@ Your website's main HTML file: `index.html`
 
 The AXP Messaging UI SDK supports following configuration options:
 
-| Option                           | Type       | Required/Optional  | Description                                                                                            |
-|----------------------------------|------------|----------|------------------------------------------------------------------------------------------------------------------|
-| `host` | `string`   | Required      | Hostname of the AXP API endpoint to connect to or an AXP region code. If a region code is provided (e.g., "na" for North America), it will be converted to the corresponding hostname (e.g., "na.api.avayacloud.com"). If a full hostname is provided (e.g., "na.api.avayacloud.com"), it will be used as is.                                                                                     |
-| `integrationId` | `string`   | Required      | The unique 36 character Integration ID available to your account administrator when the integration was created. |
-| `appKey` | `string` | Required      | The unique key associate with tenant in case of APIXH integration.                                               |
-| `sessionParameters` | `object`   | Optional       | The session parameters to be passed to the AXP server.                                                           |
-| `logLevel` | `LogLevel` | Optional       | The log level for the AXP Messaging UI SDK. Default is `WARN`.                                                  |
-| `idleTimeoutDuration`            | `number`   | Optional       | The duration in milliseconds after which the user is considered idle.                                            |
-| `idleShutdownGraceTimeoutDuration`| `number`   | Optional       | The duration in milliseconds after idle timeout after which and the session is closed automatically due to user inactivity. |
-| `locale`                         | `string`   | Optional       | The locale to be used for the AXP Messaging UI SDK. Default is `en-US`.                                         |
-| `onMessageBubbleClicked`         | `function` | Optional      | The callback function to be called when the message bubble is clicked.                                           |
-| `onInit`                         | `function` | Optional       | The callback function to be called when the AXP Messaging UI SDK is initialized for the current User (identified by the JWT). |
-| `onShutdown`                     | `function` | Optional       | The callback function to be called when the current session for the current User is closed.                     |
-| `onIdleTimeout`                  | `function` | Optional       | The callback function to be called when the current User is considered idle.                                     |
-| `onLocationRequest`              | `function` | Optional       | The callback function to be called when the User is requested to share their location.                           |
-| `beforeMessageSend`              | `function` | Optional       | The callback function to be called before a message is sent.                                                     |
-| `beforeMessageRender`            | `function` | Optional       | The callback function to be called before a message is rendered on the screen.                                   |
-| `displayStrings`                 | `DisplayStrings` | Optional | An object containing the display strings and their translations to be used in the AXP Messaging UI SDK. See [custom display strings and translations](#custom-display-strings-and-translations) section. |
-| `emojiMartTranslations`          | `Record<Locale,EmojiMartTranslation>` | Optional | AXP Messaging UI SDK uses [Emoji Mart](https://github.com/missive/emoji-mart) Component as emoji picker. This configuration expects an object containing the display strings and their translations to be used for the emoji mart component. |
-| `themeCustomizations`            | `Record<string, AxpMessagingUiTheme>` | Optional | An object containing the theme customizations for the AXP Messaging UI SDK. Each key is a theme name and the value is the customizations for that theme. See [theme customization](#theme-customization) section. |
-| `defaultTheme`                   | `string`   | Optional       | Name of the default theme out of the themes provided via the `themeCustomizations` configuration to be used for the AXP Messaging UI SDK. |
+| Option                             | Type                                  | Required/Optional | Description                                                                                                                                                                                                                                                                                                   |
+| ---------------------------------- | ------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `host`                             | `string`                              | Required          | Hostname of the AXP API endpoint to connect to or an AXP region code. If a region code is provided (e.g., "na" for North America), it will be converted to the corresponding hostname (e.g., "na.api.avayacloud.com"). If a full hostname is provided (e.g., "na.api.avayacloud.com"), it will be used as is. |
+| `integrationId`                    | `string`                              | Required          | The unique 36 character Integration ID available to your account administrator when the integration was created.                                                                                                                                                                                              |
+| `appKey`                           | `string`                              | Required          | The unique key associate with tenant in case of APIXH integration.                                                                                                                                                                                                                                            |
+| `sessionParameters`                | `object`                              | Optional          | The session parameters to be passed to the AXP server.                                                                                                                                                                                                                                                        |
+| `logLevel`                         | `LogLevel`                            | Optional          | The log level for the AXP Messaging UI SDK. Default is `WARN`.                                                                                                                                                                                                                                                |
+| `idleTimeoutDuration`              | `number`                              | Optional          | The duration in milliseconds after which the user is considered idle.                                                                                                                                                                                                                                         |
+| `idleShutdownGraceTimeoutDuration` | `number`                              | Optional          | The duration in milliseconds after idle timeout after which and the session is closed automatically due to user inactivity.                                                                                                                                                                                   |
+| `locale`                           | `string`                              | Optional          | The locale to be used for the AXP Messaging UI SDK. Default is `en-US`.                                                                                                                                                                                                                                       |
+| `onMessageBubbleClicked`           | `function`                            | Optional          | The callback function to be called when the message bubble is clicked.                                                                                                                                                                                                                                        |
+| `onInit`                           | `function`                            | Optional          | The callback function to be called when the AXP Messaging UI SDK is initialized for the current User (identified by the JWT).                                                                                                                                                                                 |
+| `onShutdown`                       | `function`                            | Optional          | The callback function to be called when the current session for the current User is closed.                                                                                                                                                                                                                   |
+| `onIdleTimeout`                    | `function`                            | Optional          | The callback function to be called when the current User is considered idle.                                                                                                                                                                                                                                  |
+| `onLocationRequest`                | `function`                            | Optional          | The callback function to be called when the User is requested to share their location.                                                                                                                                                                                                                        |
+| `beforeMessageSend`                | `function`                            | Optional          | The callback function to be called before a message is sent.                                                                                                                                                                                                                                                  |
+| `beforeMessageRender`              | `function`                            | Optional          | The callback function to be called before a message is rendered on the screen.                                                                                                                                                                                                                                |
+| `displayStrings`                   | `DisplayStrings`                      | Optional          | An object containing the display strings and their translations to be used in the AXP Messaging UI SDK. See [custom display strings and translations](#custom-display-strings-and-translations) section.                                                                                                      |
+| `emojiMartTranslations`            | `Record<Locale,EmojiMartTranslation>` | Optional          | AXP Messaging UI SDK uses [Emoji Mart](https://github.com/missive/emoji-mart) Component as emoji picker. This configuration expects an object containing the display strings and their translations to be used for the emoji mart component.                                                                  |
+| `themeCustomizations`              | `Record<string, AxpMessagingUiTheme>` | Optional          | An object containing the theme customizations for the AXP Messaging UI SDK. Each key is a theme name and the value is the customizations for that theme. See [theme customization](#theme-customization) section.                                                                                             |
+| `defaultTheme`                     | `string`                              | Optional          | Name of the default theme out of the themes provided via the `themeCustomizations` configuration to be used for the AXP Messaging UI SDK.                                                                                                                                                                     |
 
 ### Authentication
 
@@ -121,16 +121,16 @@ The AXP Messaging UI SDK expects an implementation of the `JwtProvider` interfac
 JWT Provider example (in TypeScript):
 
 ```typescript
-import { JwtProvider } from '@avaya/axp-messaging-ui-sdk';
+import { JwtProvider } from "@avaya/axp-messaging-ui-sdk";
 
 class MyJwtProvider implements JwtProvider {
-  onExpiryWarning(timeToExpiry: number): void {
-    // ...
-  }
+	onExpiryWarning(timeToExpiry: number): void {
+		// ...
+	}
 
-  onExpiry(): void {
-    // ...
-  }
+	onExpiry(): void {
+		// ...
+	}
 }
 ```
 
@@ -155,7 +155,7 @@ Before the User can start sending messages, the AXP Messaging UI SDK must be ini
 It can be imported as follows:
 
 ```ts
-import { AxpMessagingUiSdk } from '@avaya/axp-messaging-ui-sdk';
+import { AxpMessagingUiSdk } from "@avaya/axp-messaging-ui-sdk";
 ```
 
 Once imported, the instance can be procured by using the static method `getInstance()` on the class `AxpMessagingUiSdk`. The `init` method can then be called on the returned instance object to initialize the AXP Messaging UI SDK.
@@ -228,7 +228,7 @@ To shutdown, the AXP Messaging UI SDK provides a `shutdown()` method on the inst
 **Example:**
 
 ```ts
-import { AxpMessagingUiSdk } from '@avaya/axp-messaging-ui-sdk';
+import { AxpMessagingUiSdk } from "@avaya/axp-messaging-ui-sdk";
 
 const axpMessagingUi = AxpMessagingUiSdk.getInstance();
 
@@ -257,9 +257,13 @@ The AXP Messaging UI SDK provides a static method `resetIdleTimeout()` on the cl
 
 The AXP Messaging UI SDK provides an option to customize the display strings used in the UI. This can be done by providing the `displayStrings` configuration during [initialization](#configuration).
 
-Check out the `DisplayStrings` type exported by the AXP Messaging UI SDK to know the strings that can be customized.
+Check out the [`DisplayStrings`](https://avayaexperienceplatform.github.io/omni-sdk-js/types/_avaya_axp_messaging_ui_sdk.DisplayStrings.html) type exported by the AXP Messaging UI SDK to know the strings that can be customized.
 
-The locale of the messaging ui can be changed by calling the static method `setLocale()` on the class `AxpMessagingUiSdk`, which takes the locale string as an argument.
+The `displayNames` property of the `DisplayStrings` can take either [`TextConfig`](https://avayaexperienceplatform.github.io/omni-sdk-js/types/_avaya_axp_messaging_ui_sdk.TextConfig.html) or [`displayNameModifier`](https://avayaexperienceplatform.github.io/omni-sdk-js/types/_avaya_axp_messaging_ui_sdk.DisplayNameModifier.html) callback function as a value for each of the participants. This function provides participant name as the parameter and expects a string in return.
+
+The locale of the messaging UI can be changed by calling the static method `setLocale()` on the class `AxpMessagingUiSdk`, which takes the locale string as an argument.
+
+Note: The custom display name to use for anonymous user can be provided through the `userDetails`.
 
 ### Theme Customization
 
@@ -267,7 +271,9 @@ The AXP Messaging UI SDK provides an option to customize the visual elements of 
 
 The themes can be changed by calling the static method `setTheme()` on the class `AxpMessagingUiSdk`.
 
-The `AxpMessagingUiTheme` type exported by the AXP Messaging UI SDK provides the structure of the theme object and all available options that can be changed. The options are organized by the various regions in the UI.
+The [`AxpMessagingUiTheme`](https://avayaexperienceplatform.github.io/omni-sdk-js/types/_avaya_axp_messaging_ui_sdk.AxpMessagingUiTheme.html) type exported by the AXP Messaging UI SDK provides the structure of the theme object and all available options that can be changed. The options are organized by the various regions in the UI.
+
+**Note**: Browsers on iOS devices may auto zoom on the input fields if their fontSize is less than `16px`. To avoid this behavior, the `fontSize` of the `textInput` field in the theme configuration should be set to `16px` or more.
 
 ### Other utilities and methods
 

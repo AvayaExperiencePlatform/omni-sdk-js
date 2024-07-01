@@ -8,10 +8,10 @@ The AXP Calling module depends on the AXP Core module. Please refer to the [AXP 
 
 AXP Calling module requires the AXP Core module.
 
-To install the AXP Calling module, download the [avaya-axp-client-sdk-core-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.1.0.tgz) and [avaya-axp-client-sdk-calling-0.1.0.tgz](./omni-sdk/avaya-axp-client-sdk-calling-0.1.0.tgz) in your project and run the following command:
+To install the AXP Calling module, download the [avaya-axp-client-sdk-core-0.2.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.2.0.tgz) and [avaya-axp-client-sdk-calling-0.2.0.tgz](./omni-sdk/avaya-axp-client-sdk-calling-0.2.0.tgz) in your project and run the following command:
 
 ```bash
-npm install ./avaya-axp-client-sdk-core-0.1.0.tgz ./avaya-axp-client-sdk-calling-0.1.0.tgz
+npm install ./avaya-axp-client-sdk-core-0.2.0.tgz ./avaya-axp-client-sdk-calling-0.2.0.tgz
 ```
 
 This will install both AXP Core and AXP Calling.
@@ -36,21 +36,24 @@ const config = {
 
 
 // Initiates a Calling conversation
-const axpSession = await AxpClientSDK.init({
-    displayName: "<USER_NAME>",
-    token: await jwtTokenProvider.fetchToken(),
-	integrationId: config.integrationId,
-	host: config.axpHostName,
-	appKey: config.appKey,
-	logLevel: config.loglevel,
-	jwtProvider: jwtTokenProvider,
-}, AxpCallingConversation());
+const axpSession = await AxpClientSDK.init(
+	{
+		displayName: "<USER_NAME>",
+		token: await jwtTokenProvider.fetchToken(),
+		integrationId: config.integrationId,
+		host: config.axpHostName,
+		appKey: config.appKey,
+		logLevel: config.loglevel,
+		jwtProvider: jwtTokenProvider,
+	},
+	AxpCallingConversation(),
+);
 const conversation: AxpCallingConversationTrait = axpSession.conversations[0];
 
-// Creates and starts a WebRTC call with optional audio muted initially 
+// Creates and starts a WebRTC call with optional audio muted initially
 const requestBuilder = new AxpCallRequestBuilder();
 if (muteAudio) {
-    requestBuilder.muteAudio();
+	requestBuilder.muteAudio();
 }
 requestBuilder.setRemoteAddress(config.callingRemoteAddress);
 const axpCall = await conversation.addCall(requestBuilder.build());
