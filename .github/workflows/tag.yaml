@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - VERSION
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: VERSION
+      - name: Push Version Tag
+        run: >-
+          TAG="v$(cat VERSION)" &&
+          git tag "$TAG" && git push origin "refs/tags/$TAG"

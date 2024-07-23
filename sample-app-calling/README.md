@@ -3,36 +3,26 @@
 WebRTC requires client to connect using HTTPS. So to run the sample app you'll need to deploy it
 to a server with a public or self signed certificates. We'll use http-server for testing.
 
-## Development
+# Development
 
-### 1. Clone or download the Omni JavaScript SDK repository
+## 1. Install AXP Omni SDK Core and Calling libraries if needed
 
-Clone or download the repo [Omni JavaScript SDK repository](https://github.com/AvayaExperiencePlatform/omni-sdk-js) of which the `sample-app-calling` is part of.
+npm install ./avaya-axp-omni-sdk-core-0.0.1.tgz ./avaya-axp-omni-sdk-calling-0.0.1.tgz
 
-### 2. Install Dependencies
+## 2. Update config settings in src/index.ts
 
-Run the following command in the `sample-app-calling` directory to install the dependencies:
-
-```shell
-npm install
-```
-
-### 3. Update config settings in src/index.ts
-
-```ts
 const config = {
 integrationId: "<integrationId>",
 appKey: "<appKey>",
 axpHostName: "<axpHostName>",
 callingRemoteAddress: "<phoneNumber>"
 };
-```
 
-### 4. Build sample app
+## 3. Build sample app
 
 npm run build
 
-### 5. Setup Certificates
+## 4. Setup Certificates
 
 Note: Certificates **MUST** be trusted for live reloading to work.
 (Reload server is on a separate port and would need to be overridden separately.)
@@ -44,14 +34,14 @@ brew install nss # if you use Firefox
 mkcert -install
 ```
 
-For other systems refer to [this link](https://github.com/FiloSottile/mkcert?tab=readme-ov-file#installation).
+For other systems see https://github.com/FiloSottile/mkcert?tab=readme-ov-file#installation
 
 ```shell
 cd sample-app-calling/ # ensure you're in this directory
 mkcert -key-file key.pem -cert-file cert.pem 127.0.0.1
 ```
 
-### 6. Run Local Server
+## 5. Run Local Server
 
 ```shell
 npm run serve
