@@ -1,6 +1,6 @@
 {
   "name": "sample-app-messaging",
-  "version": "0.2.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,14 +9,13 @@
     "test": "echo \"No tests to run\""
   },
   "type": "module",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "@avaya/axp-messaging-ui-sdk": "file:../omni-sdk/avaya-axp-messaging-ui-sdk-0.2.0.tgz",
-    "uuid": "^9.0.1"
+    "@avaya/axp-omni-sdk-messaging-ui": "^0.0.1",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "http-server": "^14.1.1",
-    "rollup": "^4.9.1",
-    "@rollup/plugin-node-resolve": "^15.2.3"  
+    "http-server": "^14.1.1"
   }
 }

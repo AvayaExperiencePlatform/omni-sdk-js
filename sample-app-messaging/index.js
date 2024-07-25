@@ -1,4 +1,4 @@
-import "@avaya/axp-messaging-ui-sdk";
+import "@avaya/axp-omni-sdk-messaging-ui";
 import { v4 as uuidv4 } from "uuid";
 
 var user = {
@@ -50,7 +50,7 @@ var instanceaxp;
 async function initOnMessageBubbleClicked(instance) {
 	console.log("Message bubble clicked", instance);
 	try {
-		if (!instance) throw new Error("Instance of axp-messaging-ui-sdk doesn't exist");
+		if (!instance) throw new Error("Instance of axp-omni-sdk-messaging-ui doesn't exist");
 		instanceaxp = instance;
 
 		const jwtToken = await fetchToken();
@@ -63,7 +63,7 @@ async function initOnMessageBubbleClicked(instance) {
 		};
 		instance.init(axpUiInitParams);
 	} catch (e) {
-		console.log("Error while initializing axp-messaging-ui-sdk", e);
+		console.log("Error while initializing axp-omni-sdk-messaging-ui", e);
 		throw e;
 	}
 }
@@ -86,8 +86,8 @@ const locationRequestHandle = () => {
 };
 
 var config = {
-	...axpMessagingUiConfig,
+	...axpOmniSdkMessagingUiConfig,
 	onMessageBubbleClicked: initOnMessageBubbleClicked,
 	onLocationRequest: locationRequestHandle,
 };
-window.axpMessagingUiConfig = config;
+window.axpOmniSdkMessagingUiConfig = config;

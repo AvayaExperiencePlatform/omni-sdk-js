@@ -1,4 +1,4 @@
-import { AxpClientSdk, JwtProvider, LogLevel } from "@avaya/axp-client-sdk-core";
+import { AxpOmniSdk, JwtProvider, LogLevel } from "@avaya/axp-omni-sdk-core";
 import {
 	AxpCalling,
 	AxpCall,
@@ -7,7 +7,7 @@ import {
 	AxpMediaInterface,
 	AxpCallingConversation,
 	AxpCallingConversationTrait,
-} from "@avaya/axp-client-sdk-calling";
+} from "@avaya/axp-omni-sdk-calling";
 
 import { playDtmfTone } from "./DTMFTone";
 
@@ -72,7 +72,7 @@ let conversation: AxpCallingConversationTrait | undefined;
 let call: AxpCall | undefined;
 
 async function login() {
-	const axpSession = await AxpClientSdk.init(
+	const axpSession = await AxpOmniSdk.init(
 		{
 			displayName: "Guest",
 			token: await jwtTokenProvider.fetchToken(),
@@ -197,7 +197,7 @@ function setupCallMonitoring(c: AxpCall) {
 		console.log("*** Call Ended: " + evt.getReason() + ";" + evt.getReasonText());
 		call = undefined;
 		updateStatusFlags();
-		void AxpClientSdk.shutdown();
+		void AxpOmniSdk.shutdown();
 	});
 
 	c.addOnMediaConnectedCallback((c) => {
@@ -217,11 +217,11 @@ function setupCallMonitoring(c: AxpCall) {
 }
 
 let sdkReady = false;
-AxpClientSdk.addSdkInitializedListener(() => {
+AxpOmniSdk.addSdkInitializedListener(() => {
 	sdkReady = true;
 	updateStatusFlags();
 });
-AxpClientSdk.addSdkShutdownListener(() => {
+AxpOmniSdk.addSdkShutdownListener(() => {
 	sdkReady = false;
 	updateStatusFlags();
 });
