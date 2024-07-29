@@ -2,41 +2,32 @@
 
 The AXP Calling SDK module provides browser based WebRTC communication. The AXP Calling module extends base Conversation with Calling capabilities.
 
-The AXP Calling module depends on the AXP Core module. Please refer to the [AXP Core documentation](/modules/_avaya_axp_client_sdk_core) before using the Calling module.
+The AXP Calling module depends on the AXP Core module. Please refer to the [AXP Core documentation](/modules/_avaya_axp_omni_sdk_core) before using the Calling module.
 
 ## Installation
 
 AXP Calling module requires the AXP Core module.
 
-To install the AXP Calling module, download the [avaya-axp-client-sdk-core-0.2.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.2.0.tgz) and [avaya-axp-client-sdk-calling-0.2.0.tgz](./omni-sdk/avaya-axp-client-sdk-calling-0.2.0.tgz) in your project and run the following command:
+To install the AXP Calling module, run the following command:
 
 ```bash
-npm install ./avaya-axp-client-sdk-core-0.2.0.tgz ./avaya-axp-client-sdk-calling-0.2.0.tgz
+npm install --save @avaya/axp-omni-sdk-calling
 ```
 
 This will install both AXP Core and AXP Calling.
 
 ## Usage
 
-The AXP Calling module provides the `AxpCallingConversation` [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the AXP Core module. To use the Calling module, you need to import the `AxpCallingConversation` mixin function and apply it. Check out more details about additional functionalities in the [Using additional functionality](./core.md#using-additional-functionalities) section of The AXP Core's documentation.
+The AXP Calling module provides the `AxpCallingConversation` [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the AXP Core module. To use the Calling module, you need to import the `AxpCallingConversation` mixin function and apply it. Check out more details about additional functionalities in the [Using additional functionality](/modules/_avaya_axp_omni_sdk_core#using-additional-functionalities) section of The AXP Core's documentation.
 
 Example of how to use AXP Calling module:
 
 ```ts
-import { AxpClientSdk, JwtProvider } from '@avaya/axp-client-sdk-core';
-import { AxpCallingConversation, AxpCallingConversationTrait } from '@avaya/axp-client-sdk-calling';
-
-const config = {
-    integrationId: "<INTEGRATION_ID>",
-    appKey: "<APP_KEY>",
-    axpHostName: "https://<Axp_HOST>",
-    callingRemoteAddress: "<E164_NUMBER>",
-    logLevel: LogLevel.DEBUG
-};
-
+import { AxpOmniSdk, JwtProvider } from "@avaya/axp-omni-sdk-core";
+import { AxpCallingConversation, AxpCallingConversationTrait } from "@avaya/axp-omni-sdk-calling";
 
 // Initiates a Calling conversation
-const axpSession = await AxpClientSDK.init(
+const axpSession = await AxpOmniSdk.init(
 	{
 		displayName: "<USER_NAME>",
 		token: await jwtTokenProvider.fetchToken(),
@@ -68,5 +59,5 @@ const axpCall = await conversation.addCall(requestBuilder.build());
 axpCall.end();
 
 // Terminates session
-AxpClientSDK.shutdown();
+AxpOmniSdk.shutdown();
 ```
