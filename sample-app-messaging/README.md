@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This JavaScript based sample web application demonstrates how to quickly integrate a web application with the Messaging UI SDK and enable it with AXP Messaging capabilities.
+This JavaScript based sample web application demonstrates how to quickly integrate a web application with the AXP Omni SDK Messaging UI and enable it with AXP Messaging capabilities.
 
 ## Steps to Run Sample Web Application
 

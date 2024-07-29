@@ -6,16 +6,16 @@ The AXP Core module provides a set of basic functionalities to initialize, shutd
 
 ## Installation
 
-To install the AXP Core, download the [avaya-axp-client-sdk-core-0.2.0.tgz](./omni-sdk/avaya-axp-client-sdk-core-0.2.0.tgz) in your project and run the following command:
+To install the AXP Core, run the following command:
 
 ```bash
-npm install ./avaya-axp-client-sdk-core-0.2.0.tgz
+npm install --save @avaya/axp-omni-sdk-core
 ```
 
-AXP Core exports a set of types and classes. Out of all the exports, the class `AxpClientSdk` is the origin point of the AXP Core usage flow. It can be imported as follows:
+AXP Core exports a set of types and classes. Out of all the exports, the class `AxpOmniSdk` is the origin point of the AXP Core usage flow. It can be imported as follows:
 
 ```typescript
-import { AxpClientSdk } from "@avaya/axp-client-sdk-core";
+import { AxpOmniSdk } from "@avaya/axp-omni-sdk-core";
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ Please refer to the documentation of the additional functionality module that yo
 
 List of currently available additional functionalities:
 
-- [AXP Messaging](./messaging.md)
+- [AXP Messaging](/modules/_avaya_axp_omni_sdk_messaging)
 
 #### How to use the additional functionalities
 
@@ -46,30 +46,30 @@ Example of adding AXP Messaging functionality to the AXP Core Conversation:
 
 ```ts
 // TS/JS
-import { AxpClientSdk } from '@avaya/axp-client-sdk-core';
-import { AxpMessagingConversation } from '@avaya/axp-client-sdk-messaging';
+import { AxpOmniSdk } from '@avaya/axp-omni-sdk-core';
+import { AxpMessagingConversation } from '@avaya/axp-omni-sdk-messaging';
 
 const EnhancedConversationClass = AxpMessagingConversation();
 
 // All arguments are not shown for brevity, refer to the Initialization section for the complete initialization example.
-const userSession = await AxpClientSdk.init(..., EnhancedConversationClass);
+const userSession = await AxpOmniSdk.init(..., EnhancedConversationClass);
 ```
 
 ### Authentication
 
-The AXP Client SDK uses JSON Web Tokens (JWT) for client authentication and requires a valid JWT to function. The JWT is obtained from your own backend web application that communicates with AXP's authentication API.
+The AXP Omni SDK uses JSON Web Tokens (JWT) for client authentication and requires a valid JWT to function. The JWT is obtained from your own backend web application that communicates with AXP's authentication API.
 
 The SDK expects an implementation of the `JwtProvider` interface to be provided during [initialization](#initialization). The `JwtProvider` implementation must have two methods:
 
 1. `onExpiryWarning`: This method is called when the JWT is about to expire. In the argument of this method, the remaining time in milliseconds before the JWT expires is provided.
 2. `onExpiry`: This method is called when the JWT has expired.
 
-**The consumers of SDK should call the `AxpClientSdk.setJwt()` to provide a new JWT to the SDK.**
+**The consumers of SDK should call the `AxpOmniSdk.setJwt()` to provide a new JWT to the SDK.**
 
 JWT Provider example (in TypeScript):
 
 ```typescript
-import { JwtProvider } from "@avaya/axp-client-sdk-core";
+import { JwtProvider } from "@avaya/axp-omni-sdk-core";
 
 class MyJwtProvider implements JwtProvider {
 	onExpiryWarning(timeToExpiry: number): void {
@@ -100,7 +100,7 @@ class MyJwtProviderJS {
 
 Before any operation can be performed with the SDK, it must be initialized. The initialization process creates a new session for the current user (identified by the JWT) and returns a `UserSession` object that contains the Conversation object corresponding to the User's ongoing conversation. For more details see the [Conversation](#conversation) section.
 
-Initialization can be done by calling the static method `init()` on the class `AxpClientSdk`. The `init()` method takes two arguments:
+Initialization can be done by calling the static method `init()` on the class `AxpOmniSdk`. The `init()` method takes two arguments:
 
 1. `initParams`: An object which has all the initialization parameters and configurations.
 2. `AdditionalFunctionality`: A Conversation class enhanced by applying the [additional functionalities](#using-additional-functionalities) using mixins.
@@ -108,8 +108,8 @@ Initialization can be done by calling the static method `init()` on the class `A
 Initialization Example:
 
 ```typescript
-import { AxpClientSdk } from '@avaya/axp-client-sdk-core';
-import { AxpMessagingConversation } from '@avaya/axp-client-sdk-messaging';
+import { AxpOmniSdk } from '@avaya/axp-omni-sdk-core';
+import { AxpMessagingConversation } from '@avaya/axp-omni-sdk-messaging';
 
 const EnhancedConversationClass = AxpMessagingConversation();
 
@@ -125,7 +125,7 @@ const initParams = {
     idleShutdownGraceTimeoutDuration: 1 * 60 * 1000, // in milliseconds
 }
 
-const userSession = await AxpClientSdk.init(initParams, EnhancedConversationClass);
+const userSession = await AxpOmniSdk.init(initParams, EnhancedConversationClass);
 ```
 
 The `init()` method returns a `Promise` that resolves to a `UserSession` object. The `UserSession` object contains the conversation object(s) that can be used for further operations.
@@ -139,7 +139,7 @@ Alternatively, the SDK emits an initialized event after the SDK initialization h
 **Important: In order to receive the initialized event, it is imperative to provide the listener function before calling the `init()` method.**
 
 ```ts
-AxpClientSdk.addSdkInitializedListener((userSession) => {
+AxpOmniSdk.addSdkInitializedListener((userSession) => {
 	// userSession object contains the conversation object that can be used for further operations. More details on the conversation object are below.
 
 	console.log("SDK Initialized");
@@ -166,17 +166,17 @@ The default conversation can be accessed from the `UserSession` object returned 
 
 ```ts
 // Arguments are not shown for brevity, refer to the Initialization section for the complete initialization example.
-const userSession = await AxpClientSdk.init(...);
+const userSession = await AxpOmniSdk.init(...);
 
 const conversation = userSession.conversations[0];
 ```
 
-Alternatively, the `AxpClientSdk` class exposes another method `getDefaultConversation()` which returns the default conversation object. Important thing to note here is that this method can be called only after the SDK has been initialized.
+Alternatively, the `AxpOmniSdk` class exposes another method `getDefaultConversation()` which returns the default conversation object. Important thing to note here is that this method can be called only after the SDK has been initialized.
 
 ```ts
-const userSession = await AxpClientSdk.init(...);
+const userSession = await AxpOmniSdk.init(...);
 
-const conversation = AxpClientSdk.getDefaultConversation();
+const conversation = AxpOmniSdk.getDefaultConversation();
 ```
 
 #### Context Parameters
@@ -242,10 +242,10 @@ The first timer is the idle timer which is started right after the session is cr
 
 The second timer is idle shutdown grace timer which runs after the idle timer has expired. This timer provides additional grace period for User or the Client to extend the session. After this timer expires, the session is terminated automatically and the SDK will raise the shutdown event and shut itself down (see [shutdown](#shutting-down-the-sdk) section for more details). If the Client wants to continue it must be reinitialize the SDK to do so.
 
-Both the timeout values can be configured during the initialization by providing their values in the init params object passed as the first argument to the `AxpClientSdk.init()` method.
+Both the timeout values can be configured during the initialization by providing their values in the init params object passed as the first argument to the `AxpOmniSdk.init()` method.
 
 ```ts
-await AxpClientSdk.init({
+await AxpOmniSdk.init({
 	// Other init params
 	idleTimeoutDuration: 5 * 60 * 1000, // in milliseconds
 	idleShutdownGraceTimeoutDuration: 1 * 60 * 1000, // in milliseconds
@@ -259,17 +259,17 @@ function warnUser(message) {
 	// Show warning on UI.
 }
 
-const handlerId = AxpClientSdk.addIdleTimeOutInvokedListener((eventPayload) => {
+const handlerId = AxpOmniSdk.addIdleTimeOutInvokedListener((eventPayload) => {
 	warnUser("You have been inactive for a while. Do you want to continue?");
 });
 
 // It can be removed by calling the removeIdleTimeoutListener method.
-AxpClientSdk.removeIdleTimeOutInvokedListener(handlerId);
+AxpOmniSdk.removeIdleTimeOutInvokedListener(handlerId);
 ```
 
 #### Extending the session
 
-The `AxpClientSdk` provides a method called `resetIdleTimeout()` which can be used to reset the idle timer or the grace timer. This method can be called whenever there is any activity from the User or the Client.
+The `AxpOmniSdk` provides a method called `resetIdleTimeout()` which can be used to reset the idle timer or the grace timer. This method can be called whenever there is any activity from the User or the Client.
 
 This method also helps the Client to extend the session in scenarios where the Client is aware that the User is active based on events from its UI.
 
@@ -282,7 +282,7 @@ function showWarningBox(eventPayload) {
 	const continueChatButton = document.getElementById("inactivity-warning-continue-chat");
 
 	continueChatButton.onclick = () => {
-		AxpClientSdk.resetIdleTimeout();
+		AxpOmniSdk.resetIdleTimeout();
 	};
 	// ...
 	setTimeout(hideWarningBox, eventPayload.gracePeriod);
@@ -295,12 +295,12 @@ function hideWarningBox() {
 
 ### Shutting down the SDK
 
-The current user's session can be terminated by calling the `shutdown()` method of `AxpClientSdk`. This will end the session and cleanup all the corresponding data within the SDK. **Irrespective of the success or failure of the termination operation, the SDK cleanup will be performed.**
+The current user's session can be terminated by calling the `shutdown()` method of `AxpOmniSdk`. This will end the session and cleanup all the corresponding data within the SDK. **Irrespective of the success or failure of the termination operation, the SDK cleanup will be performed.**
 
-To shut down the SDK, call the `shutdown()` method on the `AxpClientSdk` class. The `shutdown()` method returns a `Promise` that resolves when the SDK has been successfully shut down.
+To shut down the SDK, call the `shutdown()` method on the `AxpOmniSdk` class. The `shutdown()` method returns a `Promise` that resolves when the SDK has been successfully shut down.
 
 ```typescript
-await AxpClientSdk.shutdown();
+await AxpOmniSdk.shutdown();
 ```
 
 > **! Important**
@@ -310,7 +310,7 @@ await AxpClientSdk.shutdown();
 Similar to the initialization process, the SDK emits a shutdown event after the SDK has been successfully shut down. The consumers can listen to these events by providing a listener function to SDK.
 
 ```ts
-AxpClientSdk.addSdkShutdownListener(() => {
+AxpOmniSdk.addSdkShutdownListener(() => {
 	console.log("SDK Shutdown");
 	// ... your cleanup code.
 });
