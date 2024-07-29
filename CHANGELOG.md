@@ -1,5 +1,40 @@
 # Change Log
 
+## v1.0.0 (July 29, 2024)
+
+- Bumped versions of all external dependencies or all modules to their latest versions.
+- Multiple bug fixes.
+
+### Breaking Changes
+
+- Renamed all packages from `@avaya/axp-client-sdk-<name>` to `@avaya/axp-omni-sdk-<name>`.
+- Renamed all the types, classes, interfaces, methods etc. that contain `ClientSdk` in their name with `OmniSdk`.
+- Bump versions of all packages to `1.0.0`.
+
+#### AXP Core
+
+- Renamed export `AxpClientSdk` to `AxpOmniSdk`.
+- Renamed export `AxpClientSdkInitParams` to `AxpOmniSdkInitParams`.
+- Renamed export `SDKEvent` to `SdkEvent`.
+- Renamed export `SDKShutdown` to `SdkShutdown`.
+- Removed field `conversationId` from type `SdkEvent` and hence from types `SdkShutdown` and `IdleTimeout` that extend it.
+- Removed type `LoggerFactory` from public API / types of AXP Core.
+
+#### AXP Messaging
+
+- Removed field `conversationId` from type `EventStreamFailed` as it extends `SdkEvent`.
+- Removed field `messageIndex` from types `Message` and `MessageEvent`.
+
+#### AXP Messaging UI
+
+- Renamed `AxpOmniSdkMessagingUi.setJWT()` method to `setJwt()`.
+- Renamed Messaging UI Web Component's name from `<axp-messaging-ui-sdk>` to `<axp-omni-sdk-messaging-ui>`.
+- Renamed export `AxpMessagingUiSdk` to `AxpOmniSdkMessagingUi`.
+- Renamed export `AxpMessagingUiTheme` to `AxpOmniSdkMessagingUiTheme`.
+- Renamed export `AxpMessagingUiConfig` to `AxpOmniSdkMessagingUiConfig`.
+- Renamed export `AxpMessagingUiInitParams` to `AxpOmniSdkMessagingUiInitParams`.
+- Renamed Messaging UI global configuration variable's name from `window.axpMessagingUiConfig` to `window.axpOmniSdkMessagingUiConfig`.
+
 ## v0.2.0 (June 28, 2024)
 
 - Bugfixes in AXP Core, AXP Messaging and AXP Calling modules.

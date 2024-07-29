@@ -3,36 +3,36 @@
 WebRTC requires client to connect using HTTPS. So to run the sample app you'll need to deploy it
 to a server with a public or self signed certificates. We'll use http-server for testing.
 
-## Development
+# Development
 
-### 1. Clone or download the Omni JavaScript SDK repository
+## 1. Setup Sample Token Server
 
-Clone or download the repo [Omni JavaScript SDK repository](https://github.com/AvayaExperiencePlatform/omni-sdk-js) of which the `sample-app-calling` is part of.
+See instructions in the [starter kit repo](https://github.com/AvayaExperiencePlatform/omni-sdk-starter-kit/tree/master/%20%20sample-web-app-server).
 
-### 2. Install Dependencies
+Then update config settings in src/index.ts:
 
-Run the following command in the `sample-app-calling` directory to install the dependencies:
+```typescript
+const config = {
+	integrationId: "<integrationId>",
+	appKey: "<appKey>",
+	axpHostName: "<axpHostName>",
+	callingRemoteAddress: "<phoneNumber>",
+};
+```
+
+## 2. Install Dependencies
 
 ```shell
 npm install
 ```
 
-### 3. Update config settings in src/index.ts
+## 3. Build Sample App
 
-```ts
-const config = {
-integrationId: "<integrationId>",
-appKey: "<appKey>",
-axpHostName: "<axpHostName>",
-callingRemoteAddress: "<phoneNumber>"
-};
+```shell
+npm run build
 ```
 
-### 4. Build sample app
-
-npm run build
-
-### 5. Setup Certificates
+## 4. Setup Certificates
 
 Note: Certificates **MUST** be trusted for live reloading to work.
 (Reload server is on a separate port and would need to be overridden separately.)
@@ -44,14 +44,14 @@ brew install nss # if you use Firefox
 mkcert -install
 ```
 
-For other systems refer to [this link](https://github.com/FiloSottile/mkcert?tab=readme-ov-file#installation).
+For other systems see https://github.com/FiloSottile/mkcert?tab=readme-ov-file#installation
 
 ```shell
 cd sample-app-calling/ # ensure you're in this directory
 mkcert -key-file key.pem -cert-file cert.pem 127.0.0.1
 ```
 
-### 6. Run Local Server
+## 5. Run Local Server
 
 ```shell
 npm run serve

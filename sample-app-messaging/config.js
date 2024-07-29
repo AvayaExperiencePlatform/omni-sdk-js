@@ -392,7 +392,7 @@ const displayStrings = {
 	},
 };
 
-var axpMessagingUiConfig = {
+var axpOmniSdkMessagingUiConfig = {
 	themeCustomizations: { professional: professionalTheme },
 	defaultTheme: "professional",
 	displayStrings: displayStrings,
@@ -411,7 +411,7 @@ var axpMessagingUiConfig = {
 	},
 
 	onInit: function (instance) {
-		console.log("AXP Messaging UI SDK has initialized", instance.initialized);
+		console.log("AXP Omni SDK Messaging UI has initialized", instance.initialized);
 	},
 
 	onShutdown: function (instance) {
@@ -419,5 +419,5 @@ var axpMessagingUiConfig = {
 	},
 };
 
-// Add the axpMessagingUiConfig object to the window object
-window.axpMessagingUiConfig = axpMessagingUiConfig;
+// Add the axpOmniSdkMessagingUiConfig object to the window object
+window.axpOmniSdkMessagingUiConfig = axpOmniSdkMessagingUiConfig;
