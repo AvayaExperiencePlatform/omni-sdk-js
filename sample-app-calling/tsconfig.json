@@ -1,9 +1,17 @@
 {
-  "extends": "../tsconfig.json",
   "include": ["./src/**/*"],
   "compilerOptions": {
     "module": "esnext",
     "outDir": "./public",
-    "declaration": false
+    "declaration": false,
+    "target": "ES2022",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "noEmitOnError": true, 
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "isolatedModules": true
   }
 }
