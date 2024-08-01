@@ -22,7 +22,7 @@ import { AxpOmniSdk } from "@avaya/axp-omni-sdk-core";
 
 ### Prerequisites
 
-Before using the AXP Omni SDK refer to [this page](https://developers.avayacloud.com/avaya-experience-platform/docs/introduction#next-steps) for a list of prerequisites.
+Before using the AXP Omni SDK refer to [this page](https://developers.avayacloud.com/avaya-experience-platform/docs/omni-sdk-introduction#next-steps) for a list of prerequisites.
 
 ### Using additional functionalities
 
@@ -34,7 +34,7 @@ Please refer to the documentation of the additional functionality module that yo
 
 List of currently available additional functionalities:
 
-- [AXP Messaging](/modules/_avaya_axp_omni_sdk_messaging)
+- [AXP Messaging](./messaging.md)
 
 #### How to use the additional functionalities
 
