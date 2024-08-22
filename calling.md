@@ -2,7 +2,7 @@
 
 The AXP Calling SDK module provides browser based WebRTC communication. The AXP Calling module extends base Conversation with Calling capabilities.
 
-The AXP Calling module depends on the AXP Core module. Please refer to the [AXP Core documentation](./core.md) before using the Calling module.
+The AXP Calling module depends on the AXP Core module. Please refer to the [AXP Core documentation](/modules/_avaya_axp_omni_sdk_core) before using the Calling module.
 
 ## Installation
 
@@ -18,7 +18,7 @@ This will install both AXP Core and AXP Calling.
 
 ## Usage
 
-The AXP Calling module provides the `AxpCallingConversation` [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the AXP Core module. To use the Calling module, you need to import the `AxpCallingConversation` mixin function and apply it. Check out more details about additional functionalities in the [Using additional functionality](./core.md#using-additional-functionalities) section of The AXP Core's documentation.
+The AXP Calling module provides the `AxpCallingConversation` [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the AXP Core module. To use the Calling module, you need to import the `AxpCallingConversation` mixin function and apply it. Check out more details about additional functionalities in the [Using additional functionality](/modules/_avaya_axp_omni_sdk_core#using-additional-functionalities) section of The AXP Core's documentation.
 
 Example of how to use AXP Calling module:
 
