@@ -2,7 +2,7 @@
 
 AXP Omni SDK Messaging UI provides a highly customizable user interface as a [Web Component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) for messaging that can be easily integrated into the Client website to enable messaging capabilities. It empowers developers to finely tailor the messaging interface, allowing customization of colors, strings, icons, typography, etc., to meet the specific visual requirements of your application.
 
-The AXP Messaging UI is build on top of [AXP Core](./core.md) and [AXP Messaging](./messaging.md) SDKs. Before using the AXP Omni SDK Messaging UI, please refer to [this page](https://developers.avayacloud.com/avaya-experience-platform/docs/omni-sdk-introduction#next-steps) for a list of prerequisites.
+The AXP Messaging UI is build on top of [AXP Core](/modules/_avaya_axp_omni_sdk_core) and [AXP Messaging](/modules/_avaya_axp_omni_sdk_messaging) SDKs. Before using the AXP Omni SDK Messaging UI, please refer to [this page](https://developers.avayacloud.com/avaya-experience-platform/docs/introduction#next-steps) for a list of prerequisites.
 
 ## Features
 
