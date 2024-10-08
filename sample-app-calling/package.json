@@ -1,31 +1,29 @@
 {
   "name": "sample-app-calling",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Sample app for testing AXP Calling module",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "build": "rollup --config",
-    "serve": "rollup --config --watch",
-    "type-check": "tsc --noEmit",
-    "build:dev": "rollup --config"
+    "serve": "rollup --config --watch"
   },
   "author": "Avaya Inc.",
   "license": "",
   "private": true,
   "dependencies": {
-    "@avaya/axp-omni-sdk-core": "^1.0.0",
-    "@avaya/axp-omni-sdk-calling": "^1.0.0",
+    "@avaya/axp-omni-sdk-core": "^1.1.0",
+    "@avaya/axp-omni-sdk-calling": "^1.1.0"
+  },
+  "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
     "http-server": "^14.1.1",
     "rollup": "^4.9.1",
-    "tslib": "^2.6.2",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-serve": "^1.1.1",
+    "rollup-plugin-sourcemaps2": "^0.4.1",
     "turbo": "^2.0.4",
     "typescript": "^5.3.3"
-  },
-  "devDependencies": {
-    "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-serve": "^1.1.1"
   }
 }

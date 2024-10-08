@@ -13,6 +13,7 @@ The AXP Messaging module depends on the AXP Core module. Please refer to the [AX
 5. **Send rich media messages**: The AXP Messaging module allows users to send rich media messages like Post back, replies and location to other participants in a conversation thread.
 6. **Receive rich media messages**: The AXP Messaging module allows users to receive rich media messages like Post back, Replies and Location Request, Carousel etc, from other participants in a conversation thread.
 7. **Send and receive attachments**: The AXP Messaging module allows users to send and receive attachments like images, videos, audio, documents etc, to other participants in a conversation thread.
+8. **Typing indicators**: The AXP Messaging module enables sending typing indicator of the user and receiving typing indicator(s) of other participants in the conversation.
 
 ## Installation
 
@@ -28,7 +29,7 @@ This will install both AXP Core and AXP Messaging.
 
 ## Usage
 
-The AXP Messaging module provides the `AxpMessagingConversation` [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the AXP Core module. To use the Messaging module, you need to import the `AxpMessagingConversation` mixin function and apply it. Check out more details about additional functionalities in the [Using additional functionality](./core.md#:using-additional-functionalities) section of The AXP Core's documentation.
+The AXP Messaging module provides the `AxpMessagingConversation` [mixin](https://www.typescriptlang.org/docs/handbook/mixins.html) that extends the Base Conversation of the AXP Core module. To use the Messaging module, you need to import the `AxpMessagingConversation` mixin function and apply it. Check out more details about additional functionalities in the `Using additional functionality` section of The [AXP Core's documentation](./core.md).
 
 Example of how to use AXP Messaging module:
 
@@ -201,6 +202,48 @@ function showMessagesOnUI(message) {
 
 conversation.addMessageArrivedListener((message) => {
 	showMessagesOnUI(message);
+});
+```
+
+### Sending typing indicators
+
+The AXP Messaging module supports sending typing indicators to notify other participants in the conversation that the user is typing. To achieve this, the client should use the `notifyUserTyping()` method on the Conversation object.
+
+This method essentially acts like a beacon. Call this method while the user is typing to notify the Contact Center about the user's typing activity. For example, call this method on every input change or key down events.
+
+Example:
+
+```ts
+const inputField = document.getElementById("input-field");
+
+inputField.addEventListener("keydown", () => {
+	conversation.notifyUserTyping();
+});
+```
+
+### Receiving typing indicators
+
+To show typing indicators when other participants in the conversation are typing, the Client must listen to the typing started and stopped events. To do so, the Client can use the `addTypingStartedListener()` and `addTypingStoppedListener()` methods on the Conversation object to register the typing started and typing stopped event listeners. The `addTypingStartedListener()` and `addTypingStoppedListener()` methods take the listener function as the argument. The listeners will be called with the `TypingStarted` and `TypingStopped` object corresponding to the respective typing events, which contain details of the participant who started or stopped typing.
+
+Example:
+
+```ts
+function showTypingIndicatorOnUi(participant) {
+	// Logic to show typing indicator for the given participant on UI.
+	// ...
+}
+
+function hideTypingIndicatorOnUi(participant) {
+	// Logic to hide typing indicator for the given participant on UI.
+	// ...
+}
+
+conversation.addTypingStartedListener((typingStartedEvent: TypingStarted) => {
+	showTypingIndicatorOnUi(typingStartedEvent.participant);
+});
+
+conversation.addTypingStoppedListener((typingStoppedEvent: TypingStopped) => {
+	hideTypingIndicatorOnUi(typingStoppedEvent.participant);
 });
 ```
 
