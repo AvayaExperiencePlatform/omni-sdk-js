@@ -1,56 +1,16 @@
-import { AxpOmniSdk, JwtProvider, LogLevel } from "@avaya/axp-omni-sdk-core";
+import { AxpOmniSdk, LogLevel } from "@avaya/axp-omni-sdk-core";
 import {
-	AxpCalling,
 	AxpCall,
+	AxpCalling,
+	AxpCallingConversation,
+	AxpCallingConversationTrait,
 	AxpCallRequestBuilder,
 	AxpDtmfTone,
 	AxpMediaInterface,
-	AxpCallingConversation,
-	AxpCallingConversationTrait,
 } from "@avaya/axp-omni-sdk-calling";
-
-import { playDtmfTone } from "./DTMFTone";
-
-const sampleTokenServerURL = "https://127.0.0.1:3000/token";
-
-const config = {
-	integrationId: "<integrationId>",
-	appKey: "<appKey>",
-	axpHostName: "<axpHostName>",
-	callingRemoteAddress: "<phoneNumber>",
-};
-
-class JwtProviderImpl implements JwtProvider {
-	userId = crypto.randomUUID();
-	user = {
-		userName: "Guest",
-		userId: this.userId,
-		verified: true,
-		userIdentifiers: {
-			emailAddresses: [this.userId + "@example.com"],
-		},
-	};
-
-	public async fetchToken(): Promise<string> {
-		const response = await fetch(sampleTokenServerURL, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(this.user),
-		});
-		const responseJson = await response.json();
-		return responseJson.jwtToken;
-	}
-
-	onExpire() {
-		console.log("JWT has expired");
-	}
-
-	onExpireWarning(remainingTime: number) {
-		console.log("JWT will expire in " + remainingTime);
-	}
-}
+import config from "./config";
+import { Authenticator } from "./auth";
+import { playDtmfTone } from "./dtmf-tone";
 
 function setupButton(name: string, onClick: () => void) {
 	document.querySelector<HTMLButtonElement>(`button[name="${name}"]`)!.onclick = onClick;
@@ -67,7 +27,7 @@ setupButton("unmuteSpeaker", () => call?.unmuteSpeaker().then(updateStatusFlags)
 	(button) => (button.onclick = sendDtmf),
 );
 
-const jwtTokenProvider = new JwtProviderImpl();
+const authenticator = new Authenticator();
 let conversation: AxpCallingConversationTrait | undefined;
 let call: AxpCall | undefined;
 
@@ -75,12 +35,12 @@ async function login() {
 	const axpSession = await AxpOmniSdk.init(
 		{
 			displayName: "Guest",
-			token: await jwtTokenProvider.fetchToken(),
+			token: await authenticator.fetchToken(),
 			integrationId: config.integrationId,
-			host: config.axpHostName!,
+			host: config.host,
 			appKey: config.appKey,
 			logLevel: LogLevel.WARN,
-			jwtProvider: jwtTokenProvider,
+			jwtProvider: authenticator,
 			idleTimeoutDuration: 360000,
 		},
 		AxpCallingConversation(),
@@ -96,30 +56,13 @@ async function login() {
 
 	monitorDevices(audioIf.getOutputInterface(), "Speaker", speakerListContainer);
 	monitorDevices(audioIf.getInputInterface(), "Microphone", microphoneListContainer);
-
-	// why is speaker not defined until device is connected/disconnected?
-	// console.log(audioIf.getOutputInterface().getAvailableDevices().map(d => d.getLabel()));
-	// console.log(audioIf.getOutputInterface().getSelectedDevice().getLabel());
 }
 
 async function startCall() {
 	await login();
 
-	// Better if all builder arguments take an argument without side effects
-	// muteAudio() should be setAudioMuted(boolean), etc.
-	//
-	// const options = new AxpCallRequestBuilder()
-	//   .setAudioMuted(muteAudioCB.checked)
-	//   .setRemoteAddress(axpConfig.remoteAddress)
-	//   .build();
-	// const axpCalling = await endpoint.createCall(options);
-
-	// Even better to use the Partial<T> type and allow TS typing enforce presence of values in a config object:
-	//
-	// const axpCalling = await endpoint.createCall({
-	//   muteAudio: startWithAudioMuted,
-	//   remoteAddress: axpConfig.remoteAddress,
-	// });
+	callStarting = true;
+	updateStatusFlags();
 
 	const muteAudio = document.querySelector<HTMLInputElement>('input[value="muteAudio"]')!.checked;
 
@@ -128,11 +71,8 @@ async function startCall() {
 		requestBuilder.muteAudio();
 	}
 
-	requestBuilder.setRemoteAddress(config.callingRemoteAddress);
-	call = await conversation!.addCall(requestBuilder.build(), setupCallMonitoring);
-
-	callStarting = true;
-	updateStatusFlags();
+	requestBuilder.setRemoteAddress(config.remoteAddress);
+	void conversation!.addCall(requestBuilder.build(), setupCallMonitoring);
 }
 
 function updateAvailableDevicesList(mediaInterface: AxpMediaInterface, deviceListContainer: HTMLSelectElement) {

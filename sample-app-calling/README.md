@@ -9,16 +9,12 @@ to a server with a public or self signed certificates. We'll use http-server for
 
 See instructions in the [starter kit repo](https://github.com/AvayaExperiencePlatform/omni-sdk-starter-kit/tree/master/%20%20sample-web-app-server).
 
-Then update config settings in src/index.ts:
+Then update the following config settings in [config.ts](src/config.ts):
 
-```typescript
-const config = {
-	integrationId: "<integrationId>",
-	appKey: "<appKey>",
-	axpHostName: "<axpHostName>",
-	callingRemoteAddress: "<phoneNumber>",
-};
-```
+- `appKey`
+- `host`
+- `integrationId`
+- `remoteAddress`
 
 ## 2. Install Dependencies
 
@@ -58,6 +54,6 @@ npm run serve
 # bonus tip: run in your IDE to see build errors
 ```
 
-And navigate to https://127.0.0.1:8080/public (Note: Avaya Experience Platform CORS will **NOT** work with `localhost`!)
+And navigate to https://127.0.0.1:8080/ (Note: Avaya Experience Platform CORS will **NOT** work with `localhost`!)
 
 This page will automatically reload when source files are changed.

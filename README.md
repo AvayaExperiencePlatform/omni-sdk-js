@@ -23,7 +23,7 @@ Start with the [AXP Core](./core.md) module to initialize the SDK and establish 
 
 ## License
 
-View [LICENSE](./LICENSE)
+View [LICENSE](https://support.avaya.com/css/public/documents/101038288)
 
 ## Changelog
 

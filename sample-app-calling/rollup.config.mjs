@@ -2,6 +2,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import serve from "rollup-plugin-serve";
 import livereload from "rollup-plugin-livereload";
+import sourcemaps from "rollup-plugin-sourcemaps2";
 import { readFileSync } from "fs";
 
 const watchPlugins = () => {
@@ -16,6 +17,7 @@ const watchPlugins = () => {
 	};
 
 	return [
+		sourcemaps(),
 		livereload({ https }),
 		serve({
 			https,
@@ -32,6 +34,7 @@ export default {
 		{
 			file: "public/index.js",
 			format: "es",
+			sourcemap: true,
 		},
 	],
 	plugins: [typescript(), resolve()].concat(watchPlugins()),

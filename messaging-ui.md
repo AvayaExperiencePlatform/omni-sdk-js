@@ -15,6 +15,7 @@ The AXP Messaging UI is build on top of [AXP Core](./core.md) and [AXP Messaging
 - **Attachments:** Enhances communication capabilities by enabling users to send attachments, either independently or with accompanying text messages, fostering a richer and more interactive messaging experience.
 - **Location Sharing:** Empower users to share location information seamlessly when requested by an agent, enhancing the contextual richness of conversations.
 - **Rich Media:** Supports rich media messages like links, post backs, replies, and carousels, allowing for dynamic and engaging content within the messaging interface.
+- **Typing indicators:** Provides real-time typing indicators to show when the participants in a Conversation are typing, enhancing the conversational experience by providing immediate feedback on the other party's engagement.
 - **Customizability**: Provides fine grained customizations options for developers to tweak the messaging interface to meet the specific visual requirements of their brand.
 
 ## Installation
@@ -274,6 +275,16 @@ The themes can be changed by calling the static method `setTheme()` on the class
 The [`AxpOmniSdkMessagingUiTheme`](https://avayaexperienceplatform.github.io/omni-sdk-js/types/_avaya_axp_omni_sdk_messaging_ui.AxpOmniSdkMessagingUiTheme.html) type exported by the AXP Omni SDK Messaging UI provides the structure of the theme object and all available options that can be changed. The options are organized by the various regions in the UI.
 
 **Note**: Browsers on iOS devices may auto zoom on the input fields if their fontSize is less than `16px`. To avoid this behavior, the `fontSize` of the `textInput` field in the theme configuration should be set to `16px` or more.
+
+#### Typing indicator customization
+
+AXP Omni SDK Messaging UI's typing indicator is composed of three parts namely the participant avatar(s), typing text and animation. They are displayed in the same order. The following customizations are available under the `typingIndicators` section of the `AxpOmniSdkMessagingUiTheme` -
+
+1. Participant avatar(s): The participant avatars can be hidden by setting the `show` property of `participantAvatars` to `false`.
+
+2. Typing text: By default, the typing text will contain names of the participants who are typing. The participant names can be excluded from the typing text by setting the `show` property of `participantNames` to `false` in the `typingText` subsection.
+
+3. Animation: The color of the typing indicator animation can be customized by setting the `indicatorColor` property of `animation`.
 
 ### Other utilities and methods
 

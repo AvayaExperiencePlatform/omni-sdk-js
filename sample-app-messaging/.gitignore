@@ -1,4 +1,2 @@
-target
-vitest-cache
 .turbo
-public/app.js
+public/index.js*
